@@ -11,4 +11,14 @@ return require('packer').startup(function(use)
 	  requires = { {'nvim-lua/plenary.nvim'} }
   }
 
+  use({
+	  'marko-cerovac/material.nvim',
+	  as = 'material',
+	  config = function()
+		  vim.cmd('colorscheme material')
+	  end
+  })
+
+  use('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
+
 end)

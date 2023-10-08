@@ -1,2 +1,4 @@
 require("kamskry.remap")
-print("hello from down here")
+vim.g.material_style = "deep ocean"
+
+
