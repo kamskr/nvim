@@ -1,4 +1,6 @@
 -- Only required if you have packer configured as `opt`
+local lsp = require("lsp-zero")
+lsp.nvim_workspace()
 vim.cmd [[packadd packer.nvim]]
 
 return require('packer').startup(function(use)
@@ -6,10 +8,18 @@ return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
 
   use {
-	  'nvim-telescope/telescope.nvim', tag = '0.1.3',
-	  -- or                            , branch = '0.1.x',
-	  requires = { {'nvim-lua/plenary.nvim'} }
+      "nvim-telescope/telescope.nvim",
+      requires = {
+          { 'nvim-lua/plenary.nvim' },
+          { "nvim-telescope/telescope-live-grep-args.nvim" },
+      },
+      config = function()
+          require("telescope").load_extension("live_grep_args")
+      end
   }
+
+  use("nvim-telescope/telescope-fzy-native.nvim")
+  use("nvim-telescope/telescope-ui-select.nvim")
 
   use({
 	  'marko-cerovac/material.nvim',
@@ -59,4 +69,5 @@ return require('packer').startup(function(use)
       },
   }
 
+  use("dart-lang/dart-vim-plugin")
 end)
