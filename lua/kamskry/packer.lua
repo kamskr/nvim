@@ -35,6 +35,12 @@ return require('packer').startup(function(use)
   use("mbbill/undotree")
   use("tpope/vim-fugitive")
   use("nvim-treesitter/nvim-treesitter-context");
+  -- Tree view like in most editors
+  use("nvim-tree/nvim-tree.lua");
+  -- Icons for the tree view
+  use("nvim-tree/nvim-web-devicons");
+  -- This is for the "powerline"?
+  use("nvim-lualine/lualine.nvim");
 
   use {
 	  'VonHeikemen/lsp-zero.nvim',
