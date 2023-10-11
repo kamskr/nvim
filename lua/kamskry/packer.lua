@@ -41,6 +41,11 @@ return require('packer').startup(function(use)
   use("nvim-tree/nvim-web-devicons");
   -- This is for the "powerline"?
   use("nvim-lualine/lualine.nvim");
+  --snippets
+  use("hrsh7th/vim-vsnip");
+  use("hrsh7th/vim-vsnip-integ");
+  use("Neevash/awesome-flutter-snippets");
+  use("RobertBrunhage/flutter-riverpod-snippets")
 
   use {
 	  'VonHeikemen/lsp-zero.nvim',

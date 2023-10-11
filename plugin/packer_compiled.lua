@@ -79,6 +79,11 @@ _G.packer_plugins = {
     path = "/Users/kamils/.local/share/nvim/site/pack/packer/start/LuaSnip",
     url = "https://github.com/L3MON4D3/LuaSnip"
   },
+  ["awesome-flutter-snippets"] = {
+    loaded = true,
+    path = "/Users/kamils/.local/share/nvim/site/pack/packer/start/awesome-flutter-snippets",
+    url = "https://github.com/Neevash/awesome-flutter-snippets"
+  },
   ["cmp-buffer"] = {
     loaded = true,
     path = "/Users/kamils/.local/share/nvim/site/pack/packer/start/cmp-buffer",
@@ -118,6 +123,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/kamils/.local/share/nvim/site/pack/packer/start/dressing.nvim",
     url = "https://github.com/stevearc/dressing.nvim"
+  },
+  ["flutter-riverpod-snippets"] = {
+    loaded = true,
+    path = "/Users/kamils/.local/share/nvim/site/pack/packer/start/flutter-riverpod-snippets",
+    url = "https://github.com/RobertBrunhage/flutter-riverpod-snippets"
   },
   ["flutter-tools.nvim"] = {
     loaded = true,
@@ -235,6 +245,16 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/kamils/.local/share/nvim/site/pack/packer/start/vim-fugitive",
     url = "https://github.com/tpope/vim-fugitive"
+  },
+  ["vim-vsnip"] = {
+    loaded = true,
+    path = "/Users/kamils/.local/share/nvim/site/pack/packer/start/vim-vsnip",
+    url = "https://github.com/hrsh7th/vim-vsnip"
+  },
+  ["vim-vsnip-integ"] = {
+    loaded = true,
+    path = "/Users/kamils/.local/share/nvim/site/pack/packer/start/vim-vsnip-integ",
+    url = "https://github.com/hrsh7th/vim-vsnip-integ"
   }
 }
 
