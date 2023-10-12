@@ -48,6 +48,16 @@ return require('packer').startup(function(use)
   use("RobertBrunhage/flutter-riverpod-snippets")
   -- global search and replace
   use("nvim-pack/nvim-spectre");
+  -- testing
+  use {
+      "nvim-neotest/neotest",
+      requires = {
+          "nvim-lua/plenary.nvim",
+          "nvim-treesitter/nvim-treesitter",
+          "antoinemadec/FixCursorHold.nvim",
+          'sidlatau/neotest-dart'
+      }
+  }
 
   use {
 	  'VonHeikemen/lsp-zero.nvim',

@@ -74,6 +74,11 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
+  ["FixCursorHold.nvim"] = {
+    loaded = true,
+    path = "/Users/kamils/.local/share/nvim/site/pack/packer/start/FixCursorHold.nvim",
+    url = "https://github.com/antoinemadec/FixCursorHold.nvim"
+  },
   LuaSnip = {
     loaded = true,
     path = "/Users/kamils/.local/share/nvim/site/pack/packer/start/LuaSnip",
@@ -170,6 +175,16 @@ _G.packer_plugins = {
     path = "/Users/kamils/.local/share/nvim/site/pack/packer/start/material",
     url = "https://github.com/marko-cerovac/material.nvim"
   },
+  neotest = {
+    loaded = true,
+    path = "/Users/kamils/.local/share/nvim/site/pack/packer/start/neotest",
+    url = "https://github.com/nvim-neotest/neotest"
+  },
+  ["neotest-dart"] = {
+    loaded = true,
+    path = "/Users/kamils/.local/share/nvim/site/pack/packer/start/neotest-dart",
+    url = "https://github.com/sidlatau/neotest-dart"
+  },
   ["nvim-cmp"] = {
     loaded = true,
     path = "/Users/kamils/.local/share/nvim/site/pack/packer/start/nvim-cmp",
@@ -264,14 +279,14 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: telescope.nvim
-time([[Config for telescope.nvim]], true)
-try_loadstring("\27LJ\2\nS\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0'\2\3\0B\0\2\1K\0\1\0\19live_grep_args\19load_extension\14telescope\frequire\0", "config", "telescope.nvim")
-time([[Config for telescope.nvim]], false)
 -- Config for: material
 time([[Config for material]], true)
 try_loadstring("\27LJ\2\n8\0\0\3\0\3\0\0056\0\0\0009\0\1\0'\2\2\0B\0\2\1K\0\1\0\25colorscheme material\bcmd\bvim\0", "config", "material")
 time([[Config for material]], false)
+-- Config for: telescope.nvim
+time([[Config for telescope.nvim]], true)
+try_loadstring("\27LJ\2\nS\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0'\2\3\0B\0\2\1K\0\1\0\19live_grep_args\19load_extension\14telescope\frequire\0", "config", "telescope.nvim")
+time([[Config for telescope.nvim]], false)
 
 _G._packer.inside_compile = false
 if _G._packer.needs_bufread == true then
