@@ -33,38 +33,6 @@ vim.diagnostic.config({
 	signs = false,
 })
 
-lsp_config["dartls"].setup({
-	capabilities = capabilities,
-	cmd = {
-		"dart",
-		"language-server",
-		"--protocol=lsp",
-		-- "--port=8123",
-		-- "--instrumentation-log-file=/Users/robertbrunhage/Desktop/lsp-log.txt",
-	},
-	filetypes = { "dart" },
-	init_options = {
-		onlyAnalyzeProjectsWithOpenFiles = false,
-		suggestFromUnimportedLibraries = true,
-		closingLabels = true,
-		outline = false,
-		flutterOutline = false,
-	},
-	settings = {
-		dart = {
-			analysisExcludedFolders = {
-				vim.fn.expand("$HOME/AppData/Local/Pub/Cache"),
-				vim.fn.expand("$HOME/.pub-cache"),
-				vim.fn.expand("/opt/homebrew/"),
-				vim.fn.expand("$HOME/tools/flutter/"),
-			},
-			updateImportsOnRename = true,
-			completeFunctionCalls = true,
-			showTodos = true,
-		},
-	},
-})
-
 lsp_config.tsserver.setup({
 	capabilities = capabilities,
 })

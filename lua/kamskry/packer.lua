@@ -93,4 +93,7 @@ return require('packer').startup(function(use)
   }
 
   use("dart-lang/dart-vim-plugin")
+  use("natebosch/vim-lsc")
+  use("natebosch/vim-lsc-dart")
+  use("neoclide/coc.nvim")
 end)
