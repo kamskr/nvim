@@ -46,6 +46,7 @@ return require('packer').startup(function(use)
   use("hrsh7th/vim-vsnip-integ");
   use("Neevash/awesome-flutter-snippets");
   use("RobertBrunhage/flutter-riverpod-snippets")
+  use("mthuong/vscode-flutter-freezed-helper")
   -- global search and replace
   use("nvim-pack/nvim-spectre");
   -- testing

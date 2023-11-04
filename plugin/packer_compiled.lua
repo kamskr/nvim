@@ -300,6 +300,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/kamils/.local/share/nvim/site/pack/packer/start/vim-vsnip-integ",
     url = "https://github.com/hrsh7th/vim-vsnip-integ"
+  },
+  ["vscode-flutter-freezed-helper"] = {
+    loaded = true,
+    path = "/Users/kamils/.local/share/nvim/site/pack/packer/start/vscode-flutter-freezed-helper",
+    url = "https://github.com/mthuong/vscode-flutter-freezed-helper"
   }
 }
 
