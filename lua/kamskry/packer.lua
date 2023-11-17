@@ -99,4 +99,6 @@ return require('packer').startup(function(use)
   use("neoclide/coc.nvim")
   use("mfussenegger/nvim-dap")
   use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
+  require("luasnip.loaders.from_vscode").lazy_load()
+
 end)
