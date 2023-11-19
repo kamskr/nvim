@@ -21,15 +21,16 @@ return {
       { text = "󰌵", texthl = "diagnosticsignhint" })
 
     require("neo-tree").setup({
-        buffers = {
-          follow_current_file = {
-            enabled = true, -- this will find and focus the file in the active buffer every time
-            --              -- the current file is changed while the tree is open.
-            leave_dirs_open = false, -- `false` closes auto expanded dirs, such as with `:neotree reveal`
-          },
+      buffers = {
+        follow_current_file = {
+          enabled = true,            -- this will find and focus the file in the active buffer every time
+          --              -- the current file is changed while the tree is open.
+          leave_dirs_open = false,   -- `false` closes auto expanded dirs, such as with `:neotree reveal`
         },
-      })
+      },
+    })
 
-      vim.cmd([[nnoremap \ :neotree reveal<cr>]])
-    end
+    vim.cmd([[nnoremap \ :neotree reveal<cr>]])
+    vim.api.nvim_set_keymap('n', '<C-n>', [[:Neotree<CR>]], { noremap = true, silent = true })
+  end
 }
