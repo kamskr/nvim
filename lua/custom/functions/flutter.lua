@@ -1,23 +1,3 @@
-require("flutter-tools").setup {
-    fvm = true,
-    widget_guides = {
-        enabled = true,
-    },
-    debugger = { -- integrate with nvim dap + install dart code debugger
-        enabled = false,
-        run_via_dap = false, -- use dap instead of a plenary job to run flutter apps
-    },
-    lsp = {
-        color = { -- show the derived colours for dart variables
-        enabled = true, -- whether or not to highlight color variables at all, only supported on flutter >= 2.10
-        background = false, -- highlight the background
-        background_color = nil, -- required, when background is transparent (i.e. background_color = { r = 19, g = 17, b = 24},)
-        foreground = false, -- highlight the foreground
-        virtual_text = true, -- show the highlight using virtual text
-        virtual_text_str = "■", -- the virtual text character to highlight
-    },
-},
-}
 -- Automatically run dartfix on save for Dart files
 -- vim.cmd('autocmd BufWritePost *.dart :!fvm dart fix % --apply')
 vim.api.nvim_set_keymap('n', '<leader>df', ':!fvm dart fix % --apply<CR>', { noremap = true, silent = true })
@@ -104,7 +84,7 @@ end
 
 vim.cmd([[command! CreateFlutterTestFile lua createFlutterTestFile()]])
 
-vim.api.nvim_set_keymap('n', '<leader>ot', [[:CreateFlutterTestFile<CR>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>ot', [[:CreateFlutterTestFile<CR>]], { noremap = true, silent = true, desc = "Go to test file, create if doesn't exist" })
 
 function createBarrelFile()
     local current_file = vim.fn.expand("%:p")
@@ -145,7 +125,7 @@ function createBarrelFile()
     -- Sort the export lines alphabetically
     table.sort(export_lines)
 
-    -- Update the barrel file
+   -- Update the barrel file
     local barrel_file = io.open(barrel_name, "w")
     if barrel_file then
         for _, line in ipairs(export_lines) do
@@ -155,8 +135,5 @@ function createBarrelFile()
     end
 end
 
--- Create a custom Neovim command for the barrel file creation
 vim.cmd([[command! CreateBarrelFile lua createBarrelFile()]])
-
--- Map <leader>ob to trigger the custom command in normal mode
-vim.api.nvim_set_keymap('n', '<leader>cb', [[:CreateBarrelFile<CR>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>cb', [[:CreateBarrelFile<CR>]], { noremap = true, silent = true, desc = "Create barrel file" })
