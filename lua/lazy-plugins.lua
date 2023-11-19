@@ -30,6 +30,8 @@ require('lazy').setup({
 
       -- Additional lua configuration, makes nvim stuff amazing!
       'folke/neodev.nvim',
+      'RobertBrunhage/flutter-riverpod-snippets',
+      'mthuong/vscode-flutter-freezed-helper',
     },
   },
 
