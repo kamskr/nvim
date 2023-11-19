@@ -7,6 +7,9 @@ vim.g.maplocalleader = ' '
 vim.g.material_style = "deep ocean"
 vim.opt.colorcolumn = "80"
 vim.opt.relativenumber = true
+
+vim.opt.spelllang = 'en_us'
+vim.opt.spell = true
 -- [[ Install `lazy.nvim` plugin manager ]]
 require('lazy-bootstrap')
 
