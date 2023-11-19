@@ -21,10 +21,8 @@ require('options')
 
 -- [[ Basic Keymaps ]]
 require('keymaps')
-require('custom/keymaps/flutter')
-require('custom/keymaps/harpoon')
-require('custom/keymaps/tests')
-
+require('custom/functions/flutter')
+--
 -- [[ Configure Telescope ]]
 -- (fuzzy finder)
 require('telescope-setup')

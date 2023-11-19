@@ -10,7 +10,7 @@ A starting point for Neovim that is:
 * Documented
 * Modular
 
-### Installation
+## Installation
 
 > **NOTE** 
 > [Backup](#FAQ) your previous configuration (if any exists)

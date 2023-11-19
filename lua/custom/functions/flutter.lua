@@ -84,7 +84,7 @@ end
 
 vim.cmd([[command! CreateFlutterTestFile lua createFlutterTestFile()]])
 
-vim.api.nvim_set_keymap('n', '<leader>ot', [[:CreateFlutterTestFile<CR>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>ot', [[:CreateFlutterTestFile<CR>]], { noremap = true, silent = true, desc = "Go to test file, create if doesn't exist" })
 
 function createBarrelFile()
     local current_file = vim.fn.expand("%:p")
@@ -136,5 +136,4 @@ function createBarrelFile()
 end
 
 vim.cmd([[command! CreateBarrelFile lua createBarrelFile()]])
-vim.api.nvim_set_keymap('n', '<leader>cb', [[:CreateBarrelFile<CR>]], { noremap = true, silent = true })
-
+vim.api.nvim_set_keymap('n', '<leader>cb', [[:CreateBarrelFile<CR>]], { noremap = true, silent = true, desc = "Create barrel file" })
