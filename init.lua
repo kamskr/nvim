@@ -45,7 +45,7 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 vim.g.material_style = "deep ocean"
-
+vim.opt.colorcolumn = "80"
 -- [[ Install `lazy.nvim` plugin manager ]]
 require('lazy-bootstrap')
 

@@ -10,27 +10,35 @@ return {
     "MunifTanjim/nui.nvim",
   },
   config = function()
-    -- if you want icons for diagnostic errors, you'll need to define them somewhere:
-    vim.fn.sign_define("diagnosticsignerror",
-      { text = " ", texthl = "diagnosticsignerror" })
-    vim.fn.sign_define("diagnosticsignwarn",
-      { text = " ", texthl = "diagnosticsignwarn" })
-    vim.fn.sign_define("diagnosticsigninfo",
-      { text = " ", texthl = "diagnosticsigninfo" })
-    vim.fn.sign_define("diagnosticsignhint",
-      { text = "󰌵", texthl = "diagnosticsignhint" })
+    -- If you want icons for diagnostic errors, you'll need to define them somewhere:
+    vim.fn.sign_define("DiagnosticSignError",
+      { text = " ", texthl = "DiagnosticSignError" })
+    vim.fn.sign_define("DiagnosticSignWarn",
+      { text = " ", texthl = "DiagnosticSignWarn" })
+    vim.fn.sign_define("DiagnosticSignInfo",
+      { text = " ", texthl = "DiagnosticSignInfo" })
+    vim.fn.sign_define("DiagnosticSignHint",
+      { text = "󰌵", texthl = "DiagnosticSignHint" })
 
     require("neo-tree").setup({
+      filesystem = {
+        follow_current_file = {
+          enabled = true,                         -- This will find and focus the file in the active buffer every time
+          --               -- the current file is changed while the tree is open.
+          leave_dirs_open = false,                -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
+        },
+      },
       buffers = {
         follow_current_file = {
-          enabled = true,            -- this will find and focus the file in the active buffer every time
+          enabled = true,            -- This will find and focus the file in the active buffer every time
           --              -- the current file is changed while the tree is open.
-          leave_dirs_open = false,   -- `false` closes auto expanded dirs, such as with `:neotree reveal`
+          leave_dirs_open = false,   -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
         },
+        group_empty_dirs = true,     -- when true, empty folders will be grouped together
       },
     })
 
-    vim.cmd([[nnoremap \ :neotree reveal<cr>]])
+    vim.cmd([[nnoremap \ :Neotree reveal<cr>]])
     vim.api.nvim_set_keymap('n', '<C-n>', [[:Neotree<CR>]], { noremap = true, silent = true })
   end
 }
