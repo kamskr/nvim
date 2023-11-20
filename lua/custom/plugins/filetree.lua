@@ -7,6 +7,7 @@ return {
   dependencies = {
     "nvim-lua/plenary.nvim",
     "MunifTanjim/nui.nvim",
+    "nvim-tree/nvim-web-devicons",
   },
   config = function()
     -- If you want icons for diagnostic errors, you'll need to define them somewhere:
@@ -36,15 +37,6 @@ return {
         group_empty_dirs = true,   -- when true, empty folders will be grouped together
       },
       default_component_configs = {
-        icon = {
-          folder_closed = "",
-          folder_open = "",
-          folder_empty = "",
-          -- The next two settings are only a fallback, if you use nvim-web-devicons and configure default icons there
-          -- then these will never be used.
-          default = "",
-          highlight = "NeoTreeFileIcon",
-        },
         git_status = {
           symbols = {
             -- Change type

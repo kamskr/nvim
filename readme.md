@@ -18,8 +18,7 @@ A starting point for Neovim that is:
 Requirements:
 * Make sure to review the readmes of the plugins if you are experiencing errors. In particular:
   * [ripgrep](https://github.com/BurntSushi/ripgrep#installation) is required for multiple [telescope](https://github.com/nvim-telescope/telescope.nvim#suggested-dependencies) pickers.
-  * [codicons](https://github.com/microsoft/vscode-codicons) add icons as described in the dap ui readme for debugger UI. Icons are also available in the `fonts/`
-Neovim's configurations are located under the following paths, depending on your OS:
+  * Add HackNerdFont to your terminal for icons to properly display. Fonts are available in the `fonts/` directory
 
 | OS | PATH |
 | :- | :--- |
