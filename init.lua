@@ -10,6 +10,10 @@ vim.opt.relativenumber = true
 
 vim.opt.spelllang = 'en_us'
 vim.opt.spell = true
+
+vim.g.copilot_assume_mapped = true
+
+
 -- [[ Install `lazy.nvim` plugin manager ]]
 require('lazy-bootstrap')
 
