@@ -55,4 +55,7 @@ vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
 vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
 vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 
+vim.api.nvim_set_keymap('n', '<leader>ss', [[:set invspell<CR>]], { desc = "Toggle spell checking" })
+
+
 -- vim: ts=2 sts=2 sw=2 et
