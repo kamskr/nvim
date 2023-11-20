@@ -30,3 +30,6 @@ Neovim's configurations are located under the following paths, depending on your
 
 
 Clone this repo to correct directory.
+
+## Flutter Tools
+If after installation, code actions and highlight doesn't work, install ast_grep via `:Mason`
