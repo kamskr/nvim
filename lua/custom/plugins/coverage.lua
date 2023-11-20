@@ -1,5 +1,5 @@
-return { 
-  'andythigpen/nvim-coverage', 
+return {
+  'andythigpen/nvim-coverage',
   config = function()
     require('coverage').setup()
   end
