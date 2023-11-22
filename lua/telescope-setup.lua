@@ -66,6 +66,7 @@ vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_files, { desc
 vim.keymap.set('n', '<C-p>', require('telescope.builtin').find_files)
 vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
 vim.keymap.set('n', '<leader>sb', require('telescope.builtin').git_branches, { desc = '[S]earch [B]ranches' })
+vim.keymap.set("n", "<leader>sc", require("telescope.builtin").git_commits, { desc = '[S]earch [C]commits' })
 vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
 vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
 vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
