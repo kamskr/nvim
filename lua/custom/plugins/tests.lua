@@ -1,6 +1,8 @@
 return {
+
   "nvim-neotest/neotest",
   dependencies = {
+    "vim-test/vim-test",
     "nvim-lua/plenary.nvim",
     "nvim-treesitter/nvim-treesitter",
     "antoinemadec/FixCursorHold.nvim",
@@ -32,9 +34,8 @@ return {
       require("neotest").run.run({ strategy = "dap" })
     end, { desc = "Debug closest test" })
 
-    vim.keymap.set("n", "<leader>ta", function()
-      require("neotest").run.run({ suite = true })
-    end, { desc = "Run all tests" })
+    vim.api.nvim_set_keymap('n', '<leader>ta', [[:TestSuite<CR>]],
+      { noremap = true, silent = true, desc = "Run all tests" })
 
     vim.keymap.set("n", "<leader>to", function()
       require("neotest").output.open({ enter = true })
