@@ -32,6 +32,7 @@ require('lazy').setup({
       'folke/neodev.nvim',
       'RobertBrunhage/flutter-riverpod-snippets',
       'mthuong/vscode-flutter-freezed-helper',
+      'jdebecka/flutter_snippets',
     },
   },
 

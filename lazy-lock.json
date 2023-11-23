@@ -10,6 +10,7 @@
   "fidget.nvim": { "branch": "main", "commit": "bd0b8b644d4fb293dc4df2718b1f2df3abd90767" },
   "flutter-riverpod-snippets": { "branch": "master", "commit": "ee10f52d4e2f75bf3ac3fa67d441b493e5770fbc" },
   "flutter-tools.nvim": { "branch": "main", "commit": "7350750d46fbeb4d2bb4878157b658d435935299" },
+  "flutter_snippets": { "branch": "main", "commit": "ee690d99bd433ab0681d291d56c5e3ae59ec6d2d" },
   "friendly-snippets": { "branch": "main", "commit": "43727c2ff84240e55d4069ec3e6158d74cb534b6" },
   "gitsigns.nvim": { "branch": "main", "commit": "0ccd5fb2316b3f8d8b2f775bc31cae7bc6a77a55" },
   "harpoon": { "branch": "master", "commit": "c1aebbad9e3d13f20bedb8f2ce8b3a94e39e424a" },

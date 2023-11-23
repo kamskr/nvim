@@ -27,6 +27,17 @@ return {
           --               -- the current file is changed while the tree is open.
           leave_dirs_open = false, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
         },
+        filtered_items = {
+          hide_by_name = {
+            --"node_modules"
+          },
+          hide_by_pattern = { -- uses glob style patterns
+            --"*.meta",
+            --"*/src/*/tsconfig.json",
+            "*/**/*.g.dart",
+            "*/**/*.freezed.dart",
+          },
+        },
       },
       buffers = {
         follow_current_file = {
