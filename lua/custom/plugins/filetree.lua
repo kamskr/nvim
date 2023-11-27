@@ -30,6 +30,7 @@ return {
         filtered_items = {
           hide_by_name = {
             --"node_modules"
+            "pubspec.lock"
           },
           hide_by_pattern = { -- uses glob style patterns
             --"*.meta",
