@@ -57,5 +57,11 @@ vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 
 vim.api.nvim_set_keymap('n', '<leader>ss', [[:set invspell<CR>]], { desc = "Toggle spell checking" })
 
+-- GIT
+vim.api.nvim_set_keymap('n', '<leader>gs', [[:Git<CR>]],
+  { noremap = true, silent = true, desc = "Open fugitive status" })
+vim.api.nvim_set_keymap('n', '<leader>si', [[:Telescope git_status<CR>]],
+  { noremap = true, silent = true, desc = "Search git status with telescope" })
+
 
 -- vim: ts=2 sts=2 sw=2 et

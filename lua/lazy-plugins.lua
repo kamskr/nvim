@@ -69,11 +69,6 @@ require('lazy').setup({
       on_attach = function(bufnr)
         vim.keymap.set('n', '<leader>hp', require('gitsigns').preview_hunk, { buffer = bufnr, desc = 'Preview git hunk' })
 
-        vim.api.nvim_set_keymap('n', '<C-g>', [[:G<CR>]],
-          { noremap = true, silent = true, desc = "Open project manager" })
-        vim.api.nvim_set_keymap('n', '<leader>gs', [[:Telescope git_status<CR>]],
-          { noremap = true, silent = true, desc = "Open project manager" })
-
         -- don't override the built-in and fugitive keymaps
         local gs = package.loaded.gitsigns
         vim.keymap.set({ 'n', 'v' }, ']c', function()
