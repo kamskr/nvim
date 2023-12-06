@@ -68,6 +68,6 @@ return {
     })
 
     vim.cmd([[nnoremap \ :Neotree reveal<cr>]])
-    vim.api.nvim_set_keymap('n', '<C-b>', [[:Neotree<CR>]], { noremap = true, silent = true, desc = "Open file tree" })
+    vim.api.nvim_set_keymap('n', '<C-o>', [[:Neotree<CR>]], { noremap = true, silent = true, desc = "Open file tree" })
   end
 }
