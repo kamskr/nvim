@@ -62,6 +62,11 @@ vim.api.nvim_set_keymap('n', '<leader>gs', [[:Git<CR>]],
   { noremap = true, silent = true, desc = "Open fugitive status" })
 vim.api.nvim_set_keymap('n', '<leader>si', [[:Telescope git_status<CR>]],
   { noremap = true, silent = true, desc = "Search git status with telescope" })
+vim.api.nvim_set_keymap('n', 'gs', [[:diffget //2<CR>]],
+  { noremap = true, silent = true, desc = "Git conflict get left change" })
+vim.api.nvim_set_keymap('n', 'gk', [[:diffget //3<CR>]],
+  { noremap = true, silent = true, desc = "Git conflict get right change" })
+
 
 
 -- vim: ts=2 sts=2 sw=2 et
