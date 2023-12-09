@@ -43,6 +43,7 @@ Then reopen nvim and install `ast_grep` again.
 ## Tmux & Iterm setup
 
 install tmux and tmux plugins
+
 ```
 brew install tmux
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
@@ -70,6 +71,7 @@ bind-key l select-pane -R
 bind  c  new-window      -c "#{pane_current_path}"
 bind  %  split-window -h -c "#{pane_current_path}"
 bind '"' split-window -v -c "#{pane_current_path}"
+bind C-o display-popup -E "tms"
 
 set -g @plugin 'tmux-plugins/tpm'
 set -g @plugin 'christoomey/vim-tmux-navigator'
