@@ -71,18 +71,19 @@ bind-key l select-pane -R
 bind  c  new-window      -c "#{pane_current_path}"
 bind  %  split-window -h -c "#{pane_current_path}"
 bind '"' split-window -v -c "#{pane_current_path}"
-bind C-o display-popup -E "tms"
 
 set -g @plugin 'tmux-plugins/tpm'
 set -g @plugin 'christoomey/vim-tmux-navigator'
 
-run '~/.tmux/plugins/tpm/tpm' 
+bind C-o display-popup -E "tms"
+
+run '~/.tmux/plugins/tpm/tpm'
 ```
 
-Run 
+Run source config: 
 
 ```
-tmux source ~/.tmux.conf` to source config
+tmux source ~/.tmux.conf
 ```
 
 Run Ctrl + b + I to install packages
