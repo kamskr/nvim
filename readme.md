@@ -38,3 +38,72 @@ If still doesn't work, follow instructions to unistall lazy.nvim:
 https://github.com/folke/lazy.nvim#-uninstalling
 
 Then reopen nvim and install `ast_grep` again.
+
+
+## Tmux & Iterm setup
+
+install tmux and tmux plugins
+```
+brew install tmux
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+```
+
+To start iterm with tmux ad this sript to `Send text at start`:
+
+```
+tmux ls && read tmux_session && tmux attach -t ${tmux_session:-default} || tmux new -s ${tmux_session:-default}
+```
+
+Paste this in `~/.tmux.conf`
+
+```
+unbind r
+bind r source-file ~/.tmux.conf
+
+set -g prefix C-b
+
+setw -g mode-keys vi
+bind-key h select-pane -L
+bind-key j select-pane -D
+bind-key k select-pane -U
+bind-key l select-pane -R
+bind  c  new-window      -c "#{pane_current_path}"
+bind  %  split-window -h -c "#{pane_current_path}"
+bind '"' split-window -v -c "#{pane_current_path}"
+
+set -g @plugin 'tmux-plugins/tpm'
+set -g @plugin 'christoomey/vim-tmux-navigator'
+
+run '~/.tmux/plugins/tpm/tpm' 
+```
+
+Run 
+
+```
+tmux source ~/.tmux.conf` to source config
+```
+
+Run Ctrl + b + I to install packages
+
+To configure all required fonts, add fonts from `/fonts` to your Font Book on mac
+
+Then configure iTerm by:
+1. Go to Settings > Profiles > Text
+2. Set font to Monace
+3. Enable `Use a different font for non ASCII text`
+4. Select `Heck Nord Font` for your ASCII Characters
+
+## Tmux sessionizer
+
+https://github.com/ThePrimeagen/.dotfiles/blob/master/bin/.local/scripts/tmux-sessionizer
+https://github.com/jrmoulton/tmux-sessionizer
+
+First install rust following instauctions: https://doc.rust-lang.org/cargo/getting-started/installation.html
+Then run `cargo install tmux-sessionizer` to install CLI tool
+
+then you can use tms command, but firest setup default path to search for repositories f.e.:
+
+```
+tms -p ~/Files
+```
+
