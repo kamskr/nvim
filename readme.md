@@ -19,6 +19,7 @@ Requirements:
 * Make sure to review the readmes of the plugins if you are experiencing errors. In particular:
   * Insatl ast-grep via Mason for Flutter Tools to work properly
   * [ripgrep](https://github.com/BurntSushi/ripgrep#installation) is required for multiple [telescope](https://github.com/nvim-telescope/telescope.nvim#suggested-dependencies) pickers.
+  * Install `brew install 1password-cli` to use 1Pass for api credentials
   * Add HackNerdFont to your terminal for icons to properly display. Fonts are available in the `fonts/` directory
 
 | OS | PATH |
