@@ -3,7 +3,7 @@
 -- Defer Treesitter setup after first render to improve startup time of 'nvim {filename}'
 vim.defer_fn(function()
   require('nvim-treesitter.configs').setup {
-    ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "javascript", "typescript", "dart", "ruby" },
+    ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "javascript", "typescript", "dart", "ruby", "python" },
 
     -- Install parsers synchronously (only applied to `ensure_installed`)
     sync_install = false,

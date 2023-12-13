@@ -53,7 +53,7 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 To start iterm with tmux ad this sript to `Send text at start`:
 
 ```
-tmux ls && read tmux_session && tmux attach -t ${tmux_session:-default} || tmux new -s ${tmux_session:-default}
+tmux ls && read tmux_session && tmux attach -t ${tmux_session:-default} || tmux attach || tmux 
 ```
 
 Paste this in `~/.tmux.conf`
