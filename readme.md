@@ -52,3 +52,8 @@ Then configure iTerm by:
 3. Enable `Use a different font for non ASCII text`
 4. Select `Heck Nord Font` for your ASCII Characters
 
+Add terminal theme:
+https://github.com/catppuccin/iterm
+
+Transparency: 5
+Blur: 15
