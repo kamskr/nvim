@@ -1,5 +1,20 @@
 -- Automatically run dartfix on save for Dart files
 -- vim.cmd('autocmd BufWritePost *.dart :!fvm dart fix % --apply')
+
+function auto_fix_on_save()
+    if next(vim.lsp.get_active_clients()) ~= nil then
+        vim.lsp.buf.code_action(
+            {
+                filter = function(action)
+                    return action.title == 'Fix All'
+                end,
+                apply = true,
+            }
+        )
+    end
+end
+
+vim.cmd([[ autocmd BufWritePre *.dart lua auto_fix_on_save() ]])
 vim.api.nvim_set_keymap('n', '<leader>df', ':!fvm dart fix % --apply<CR>', { noremap = true, silent = true })
 
 function createNestedDirectory(directoryPath)
@@ -65,7 +80,8 @@ end
 
 vim.cmd([[command! CreateFlutterTestFile lua createFlutterTestFile()]])
 
-vim.api.nvim_set_keymap('n', '<leader>ot', [[:CreateFlutterTestFile<CR>]], { noremap = true, silent = true, desc = "Go to test file, create if doesn't exist" })
+vim.api.nvim_set_keymap('n', '<leader>ot', [[:CreateFlutterTestFile<CR>]],
+    { noremap = true, silent = true, desc = "Go to test file, create if doesn't exist" })
 
 function createBarrelFile()
     local current_file = vim.fn.expand("%:p")
@@ -106,7 +122,7 @@ function createBarrelFile()
     -- Sort the export lines alphabetically
     table.sort(export_lines)
 
-   -- Update the barrel file
+    -- Update the barrel file
     local barrel_file = io.open(barrel_name, "w")
     if barrel_file then
         for _, line in ipairs(export_lines) do
@@ -117,4 +133,5 @@ function createBarrelFile()
 end
 
 vim.cmd([[command! CreateBarrelFile lua createBarrelFile()]])
-vim.api.nvim_set_keymap('n', '<leader>cb', [[:CreateBarrelFile<CR>]], { noremap = true, silent = true, desc = "Create barrel file" })
+vim.api.nvim_set_keymap('n', '<leader>cb', [[:CreateBarrelFile<CR>]],
+    { noremap = true, silent = true, desc = "Create barrel file" })
