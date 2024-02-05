@@ -4,46 +4,45 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
-vim.g.material_style = "deep ocean"
+vim.g.material_style = 'deep ocean'
 
-vim.opt.colorcolumn = "80"
+vim.opt.colorcolumn = '80'
 vim.opt.relativenumber = true
 vim.o.exrc = true
-
 -- vim.opt.spelllang = 'en_us'
 -- vim.opt.spell = true
 
 vim.g.copilot_assume_mapped = true
 
-
 -- [[ Install `lazy.nvim` plugin manager ]]
-require('lazy-bootstrap')
+require 'lazy-bootstrap'
 
 -- [[ Configure plugins ]]
-require('lazy-plugins')
+require 'lazy-plugins'
 
 -- [[ Setting options ]]
-require('options')
+require 'options'
 
 -- [[ Basic Keymaps ]]
-require('keymaps')
-require('custom/functions/flutter')
+require 'keymaps'
+require 'custom/functions/flutter'
+require 'custom/functions/typescript'
 --
 -- [[ Configure Telescope ]]
 -- (fuzzy finder)
-require('telescope-setup')
+require 'telescope-setup'
 
 -- [[ Configure Treesitter ]]
 -- (syntax parser for highlighting)
-require('treesitter-setup')
+require 'treesitter-setup'
 
 -- [[ Configure LSP ]]
 -- (Language Server Protocol)
-require('lsp-setup')
+require 'lsp-setup'
 
 -- [[ Configure nvim-cmp ]]
 -- (completion)
-require('cmp-setup')
+require 'cmp-setup'
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
