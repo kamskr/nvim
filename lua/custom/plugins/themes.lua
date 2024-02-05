@@ -1,17 +1,6 @@
 return {
   {
     'marko-cerovac/material.nvim',
-    name = 'material',
-    config = function()
-      require('material').setup {
-        -- ... other settings
-        disable = {
-          -- ... other settings
-          background = true,
-        },
-      }
-      vim.cmd 'colorscheme material'
-    end,
   },
   {
     'catppuccin/nvim',
@@ -63,6 +52,7 @@ return {
           -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
         },
       }
+      vim.cmd 'colorscheme catppuccin'
     end,
   },
   {
