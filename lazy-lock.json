@@ -58,4 +58,3 @@
   "vim-visual-multi": { "branch": "master", "commit": "e67f7fa011c98fc5426352d3bb06362a0f70af3c" },
   "vscode-flutter-freezed-helper": { "branch": "master", "commit": "ecbe47c6c4a2e369e1d4a35748ca12d96f18e767" },
   "which-key.nvim": { "branch": "main", "commit": "4433e5ec9a507e5097571ed55c02ea9658fb268a" }
-}
