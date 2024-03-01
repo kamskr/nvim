@@ -99,8 +99,6 @@ local servers = {
   -- clangd = {},
   -- gopls = {},
   -- rust_analyzer = {},
-  eslint = {},
-  pyright = {},
   tsserver = {},
   html = { filetypes = { 'html', 'twig', 'hbs' } },
   ast_grep = {},
