@@ -29,11 +29,14 @@ return {
     )
 
     require('neo-tree').setup {
+      window = {
+        position = 'current', -- left by default
+      },
       filesystem = {
         follow_current_file = {
-          enabled = true,          -- This will find and focus the file in the active buffer every time
+          enabled = true,         -- This will find and focus the file in the active buffer every time
           --               -- the current file is changed while the tree is open.
-          leave_dirs_open = false, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
+          leave_dirs_open = true, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
         },
         filtered_items = {
           hide_by_name = {
@@ -78,8 +81,8 @@ return {
     vim.cmd [[nnoremap \ :Neotree reveal<cr>]]
     vim.api.nvim_set_keymap(
       'n',
-      '<C-o>',
-      [[:Neotree<CR>]],
+      '<leader>pv',
+      [[:Neotree reveal<CR>]],
       { noremap = true, silent = true, desc = 'Open file tree' }
     )
   end,

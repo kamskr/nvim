@@ -93,11 +93,11 @@ function createBarrelFile()
     local current_file = vim.fn.expand '%:p'
     local current_dir = vim.fn.expand '%:p:h'
     -- Use this to create barrel file with custom name
-    local barrel_name = current_dir .. '/export.dart'
-    -- local barrel_name = current_dir
-    --     .. '/'
-    --     .. vim.fn.fnamemodify(current_dir, ':t')
-    --     .. '.dart'
+    -- local barrel_name = current_dir .. '/export.dart'
+    local barrel_name = current_dir
+        .. '/'
+        .. vim.fn.fnamemodify(current_dir, ':t')
+        .. '.dart'
 
     local current_filename = vim.fn.fnamemodify(current_file, ':t:r')
 
