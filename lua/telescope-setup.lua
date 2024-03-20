@@ -14,6 +14,7 @@ require('telescope').setup {
 -- Enable telescope fzf native, if installed
 pcall(require('telescope').load_extension, 'fzf')
 pcall(require('telescope').load_extension, 'dap')
+pcall(require('telescope').load_extension, 'live_grep_args')
 
 -- Telescope live_grep in git root
 -- Function to find the git root directory based on the current buffer's path
@@ -116,7 +117,7 @@ vim.keymap.set(
 vim.keymap.set(
   'n',
   '<leader>sg',
-  require('telescope.builtin').live_grep,
+  require('telescope').extensions.live_grep_args.live_grep_args,
   { desc = '[S]earch by [G]rep' }
 )
 vim.keymap.set(
