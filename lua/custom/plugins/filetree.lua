@@ -81,7 +81,7 @@ return {
     vim.cmd [[nnoremap \ :Neotree reveal<cr>]]
     vim.api.nvim_set_keymap(
       'n',
-      '<leader>pv',
+      '<leader>p',
       [[:Neotree reveal<CR>]],
       { noremap = true, silent = true, desc = 'Open file tree' }
     )
