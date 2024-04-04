@@ -15,7 +15,6 @@ A starting point for Neovim that is:
 Requirements:
 
 - Make sure to review the readmes of the plugins if you are experiencing errors. In particular:
-  - Install ast_grep via Mason for Flutter Tools to work properly
   - [ripgrep](https://github.com/BurntSushi/ripgrep#installation) is required for multiple [telescope](https://github.com/nvim-telescope/telescope.nvim#suggested-dependencies) pickers.
   - Install `brew install 1password-cli` to use 1Pass for api credentials
   - Add HackNerdFont to your terminal for icons to properly display. Fonts are available in the `fonts/` directory
@@ -31,7 +30,6 @@ Clone this repo to correct directory.
 
 ## Flutter Tools
 
-If after installation, code actions and highlight doesn't work, install `ast_grep` via `:Mason`
 If still doesn't work, follow instructions to unistall lazy.nvim:
 
 https://github.com/folke/lazy.nvim#-uninstalling

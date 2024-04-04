@@ -38,7 +38,7 @@ require 'treesitter-setup'
 
 -- [[ Configure LSP ]]
 -- (Language Server Protocol)
-require 'lsp-setup'
+-- require 'lsp-setup'
 
 -- [[ Configure nvim-cmp ]]
 -- (completion)
