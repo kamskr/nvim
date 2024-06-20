@@ -1,89 +1,86 @@
--- Unless you are still migrating, remove the deprecated commands from v1.x
-vim.cmd [[ let g:neo_tree_remove_legacy_commands = 1 ]]
-
 return {
-  'nvim-neo-tree/neo-tree.nvim',
-  version = '*',
-  dependencies = {
-    'nvim-lua/plenary.nvim',
-    'MunifTanjim/nui.nvim',
-    'nvim-tree/nvim-web-devicons',
-  },
+  'stevearc/oil.nvim',
+  opts = {},
+  dependencies = { 'nvim-tree/nvim-web-devicons' },
   config = function()
-    -- If you want icons for diagnostic errors, you'll need to define them somewhere:
-    vim.fn.sign_define(
-      'DiagnosticSignError',
-      { text = ' ', texthl = 'DiagnosticSignError' }
-    )
-    vim.fn.sign_define(
-      'DiagnosticSignWarn',
-      { text = ' ', texthl = 'DiagnosticSignWarn' }
-    )
-    vim.fn.sign_define(
-      'DiagnosticSignInfo',
-      { text = ' ', texthl = 'DiagnosticSignInfo' }
-    )
-    vim.fn.sign_define(
-      'DiagnosticSignHint',
-      { text = ' ', texthl = 'DiagnosticSignHint' }
-    )
-
-    require('neo-tree').setup {
-      window = {
-        position = 'current', -- left by default
-      },
-      filesystem = {
-        follow_current_file = {
-          enabled = true,         -- This will find and focus the file in the active buffer every time
-          --               -- the current file is changed while the tree is open.
-          leave_dirs_open = true, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
-        },
-        filtered_items = {
-          hide_by_name = {
-            --"node_modules"
+    require('oil').setup {
+      default_file_explorer = true,
+      delete_to_trash = true,
+      skip_confirm_for_simple_edits = true,
+      view_options = {
+        natural_order = true,
+        is_hidden_file = function(name, bufnr)
+          -- Rule 1: Hide specific file names
+          local hide_by_name = {
             'pubspec.lock',
-          },
-          hide_by_pattern = { -- uses glob style patterns
-            --"*.meta",
-            --"*/src/*/tsconfig.json",
-            '*/**/*.g.dart',
-            '*/**/*.freezed.dart',
-          },
-        },
+            -- Add more file names if needed
+          }
+
+          for _, hidden_name in ipairs(hide_by_name) do
+            if name == hidden_name then
+              return true
+            end
+          end
+
+          -- Rule 2: Hide files matching specific patterns
+          local hide_by_pattern = {
+            '.*%.g%.dart',
+            '.*%.freezed%.dart',
+            -- Add more patterns if needed
+          }
+
+          for _, pattern in ipairs(hide_by_pattern) do
+            if string.match(name, pattern) then
+              return true
+            end
+          end
+
+          -- Default rule: Check if the file starts with a dot
+          return vim.startswith(name, '.')
+        end,
       },
-      buffers = {
-        follow_current_file = {
-          enabled = true,          -- This will find and focus the file in the active buffer every time
-          --              -- the current file is changed while the tree is open.
-          leave_dirs_open = false, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
-        },
-        group_empty_dirs = true,   -- when true, empty folders will be grouped together
+      float = {
+        padding = 2,
+        max_width = 90,
+        max_height = 0,
       },
-      default_component_configs = {
-        git_status = {
-          symbols = {
-            -- Change type
-            added = '', -- or "✚", but this is redundant info if you use git_status_colors on the name
-            modified = '', -- or "", but this is redundant info if you use git_status_colors on the name
-            deleted = '✖', -- this can only be used in the git_status source
-            renamed = 'R', -- this can only be used in the git_status source
-            -- Status type
-            untracked = 'U',
-            ignored = 'I',
-            unstaged = 'U',
-            staged = 'S',
-            conflict = 'C!',
-          },
-        },
+      win_options = {
+        wrap = true,
+        winblend = 0,
       },
+      keymaps = {
+        ['<C-c>'] = false,
+        ['<C-v>'] = 'actions.preview',
+        ['q'] = 'actions.close',
+        ['<C-h>'] = 'actions.toggle_hidden',
+        ['?'] = 'actions.show_help',
+        ['<CR>'] = 'actions.select',
+        ['<C-s>'] = {
+          'actions.select',
+          opts = { vertical = true },
+          desc = 'Open the entry in a vertical split',
+        },
+        ['<C-t>'] = {
+          'actions.select',
+          opts = { tab = true },
+          desc = 'Open the entry in new tab',
+        },
+        ['<C-r>'] = 'actions.refresh',
+        ['-'] = 'actions.parent',
+        ['_'] = 'actions.open_cwd',
+        ['`'] = 'actions.cd',
+        ['~'] = {
+          'actions.cd',
+          opts = { scope = 'tab' },
+          desc = ':tcd to the current oil directory',
+        },
+        ['gs'] = 'actions.change_sort',
+        ['gx'] = 'actions.open_external',
+        ['g\\'] = 'actions.toggle_trash',
+      },
+      use_default_keymaps = false,
     }
 
-    vim.cmd [[nnoremap \ :Neotree reveal<cr>]]
-    vim.api.nvim_set_keymap(
-      'n',
-      '<leader>p',
-      [[:Neotree reveal<CR>]],
-      { noremap = true, silent = true, desc = 'Open file tree' }
-    )
+    vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = 'Open parent directory' })
   end,
 }
