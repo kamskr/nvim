@@ -38,6 +38,9 @@ return {
           -- Default rule: Check if the file starts with a dot
           return vim.startswith(name, '.')
         end,
+        is_always_hidden = function(name, _)
+          return name == '..' or name == '.git'
+        end,
       },
       float = {
         padding = 2,
