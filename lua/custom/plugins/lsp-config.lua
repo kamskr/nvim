@@ -163,7 +163,6 @@ return { -- LSP Configuration & Plugins
       -- tsserver = {},
       --
       pyright = {},
-      tsserver = {},
       html = { filetypes = { 'html', 'twig', 'hbs' } },
       eslint_d = {},
       pylsp = {},

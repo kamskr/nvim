@@ -4,10 +4,12 @@ return {
   config = function()
     require('todo-comments').setup {
       highlight = {
-        pattern = [[.*<(KEYWORDS)(\([^\)]*\))?:]],
+        -- vimgrep regex, supporting the pattern TODO(name):
+        pattern = [[.*<((KEYWORDS)%(\(.{-1,}\))?):]],
       },
       search = {
-        pattern = [[\b(KEYWORDS)(\([^\)]*\))?:]],
+        -- ripgrep regex, supporting the pattern TODO(name):
+        pattern = [[\b(KEYWORDS)(\(\w*\))*:]],
       },
     }
     vim.api.nvim_set_keymap(
