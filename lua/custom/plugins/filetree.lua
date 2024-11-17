@@ -13,7 +13,17 @@ return {
           -- Rule 1: Hide specific file names
           local hide_by_name = {
             'pubspec.lock',
-            -- Add more file names if needed
+            'config-staging.json',
+            'config-production.json',
+            'config-example.json',
+            'config-development.json',
+            'custom_lint.log',
+            'flutter_launcher_icons-development.yaml',
+            'flutter_launcher_icons-production.yaml',
+            'flutter_launcher_icons-staging.yaml',
+            'flutter_native_splash-development.yaml',
+            'flutter_native_splash-production.yaml',
+            'flutter_native_splash-staging.yaml',
           }
 
           for _, hidden_name in ipairs(hide_by_name) do
@@ -26,7 +36,6 @@ return {
           local hide_by_pattern = {
             '.*%.g%.dart',
             '.*%.freezed%.dart',
-            -- Add more patterns if needed
           }
 
           for _, pattern in ipairs(hide_by_pattern) do

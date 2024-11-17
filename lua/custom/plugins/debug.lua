@@ -21,6 +21,7 @@ return {
     -- Add your own debuggers here
     'leoluz/nvim-dap-go',
     'nvim-neotest/nvim-nio',
+    'lucaSartore/nvim-dap-exception-breakpoints',
   },
   config = function()
     local dap = require 'dap'
@@ -117,6 +118,34 @@ return {
           disconnect = '⏏',
         },
       },
+      layouts = {
+        {
+          elements = {
+            {
+              id = 'scopes',
+              size = 0.2,
+            },
+            {
+              id = 'breakpoints',
+              size = 0.2,
+            },
+            {
+              id = 'stacks',
+              size = 0.2,
+            },
+            {
+              id = 'watches',
+              size = 0.2,
+            },
+            {
+              id = 'repl',
+              size = 0.2,
+            },
+          },
+          position = 'left',
+          size = 40,
+        },
+      },
     }
 
     -- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
@@ -124,14 +153,18 @@ return {
       'n',
       '<leader>du',
       dapui.toggle,
-      { desc = 'Debug: See last session result.' }
+      { desc = 'Debug: toggle UI' }
     )
 
     dap.listeners.after.event_initialized['dapui_config'] = dapui.open
     dap.listeners.before.event_terminated['dapui_config'] = dapui.close
     dap.listeners.before.event_exited['dapui_config'] = dapui.close
 
-    -- Install golang specific config
-    require('dap-go').setup()
+    local set_exception_breakpoints = require 'nvim-dap-exception-breakpoints'
+
+    vim.api.nvim_set_keymap('n', '<leader>de', '', {
+      desc = '[D]ebug [E]xception ondition breakpoints',
+      callback = set_exception_breakpoints,
+    })
   end,
 }
