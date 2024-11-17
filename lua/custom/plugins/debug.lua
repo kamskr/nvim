@@ -166,5 +166,12 @@ return {
       desc = '[D]ebug [E]xception ondition breakpoints',
       callback = set_exception_breakpoints,
     })
+
+    vim.api.nvim_set_keymap('n', '<leader>dk', '', {
+      desc = 'Eval under cursor',
+      callback = function()
+        require('dapui').eval(nil, { enter = true })
+      end,
+    })
   end,
 }
