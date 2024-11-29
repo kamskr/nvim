@@ -83,7 +83,11 @@ vim.keymap.set(
   require('telescope.builtin').git_files,
   { desc = 'Search [G]it Files' }
 )
-vim.keymap.set('n', '<C-p>', require('telescope.builtin').find_files)
+
+vim.keymap.set('n', '<C-p>', function()
+  require('telescope.builtin').find_files { hidden = true }
+end, { desc = '[C]ustom Find [F]iles' })
+
 vim.keymap.set(
   'n',
   '<leader>sf',

@@ -3,7 +3,6 @@
 --  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
-
 vim.g.material_style = 'deep ocean'
 
 vim.opt.colorcolumn = '80'
@@ -27,6 +26,7 @@ require 'options'
 require 'keymaps'
 require 'custom/functions/flutter'
 require 'custom/functions/typescript'
+require 'custom/functions/auto-build-arb'
 --
 -- [[ Configure Telescope ]]
 -- (fuzzy finder)

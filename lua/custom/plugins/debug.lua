@@ -123,7 +123,7 @@ return {
           elements = {
             {
               id = 'stacks',
-              size = 0,
+              size = 0.1,
             },
             {
               id = 'breakpoints',
@@ -131,7 +131,7 @@ return {
             },
             {
               id = 'watches',
-              size = 0.2,
+              size = 0.1,
             },
             {
               id = 'scopes',
@@ -163,7 +163,7 @@ return {
     local set_exception_breakpoints = require 'nvim-dap-exception-breakpoints'
 
     vim.api.nvim_set_keymap('n', '<leader>de', '', {
-      desc = '[D]ebug [E]xception ondition breakpoints',
+      desc = '[D]ebug [E]xception condition breakpoints',
       callback = set_exception_breakpoints,
     })
 
