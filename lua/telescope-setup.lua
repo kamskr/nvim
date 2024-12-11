@@ -120,12 +120,6 @@ vim.keymap.set(
 )
 vim.keymap.set(
   'n',
-  '<leader>sg',
-  require('telescope').extensions.live_grep_args.live_grep_args,
-  { desc = '[S]earch by [G]rep' }
-)
-vim.keymap.set(
-  'n',
   '<leader>sG',
   ':LiveGrepGitRoot<cr>',
   { desc = '[S]earch by [G]rep on Git Root' }
@@ -154,5 +148,7 @@ vim.keymap.set(
   require('telescope').extensions.dap.list_breakpoints,
   { desc = '[L]ist [B]reakpoints' }
 )
+
+require('custom.functions.telescope-multi-grep').setup()
 
 -- vim: ts=2 sts=2 sw=2 et
