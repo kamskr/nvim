@@ -21,6 +21,7 @@ return {
     -- Add your own debuggers here
     'leoluz/nvim-dap-go',
     'nvim-neotest/nvim-nio',
+    -- Toggle stop at exception breakpoints
     'lucaSartore/nvim-dap-exception-breakpoints',
   },
   config = function()
