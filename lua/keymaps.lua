@@ -108,6 +108,13 @@ vim.api.nvim_set_keymap(
   { noremap = true, silent = true, desc = 'Git conflict get right change' }
 )
 
+vim.api.nvim_set_keymap(
+  'n',
+  '<leader>gh',
+  [[:vertical Git log -p -- %<CR>]],
+  { noremap = true, silent = true, desc = 'Git open file history' }
+)
+
 -- Windows management
 -- Switching
 vim.keymap.set('n', '<C-h>', '<C-w>h')
