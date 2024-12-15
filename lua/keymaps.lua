@@ -70,10 +70,10 @@ vim.keymap.set({ 'n', 'v' }, '<leader>d', [["_d]])
 vim.keymap.set('n', 'Q', '<nop>')
 vim.keymap.set('n', '<leader>f', vim.lsp.buf.format)
 
-vim.keymap.set('n', '<C-k>', '<cmd>cnext<CR>zz')
-vim.keymap.set('n', '<C-j>', '<cmd>cprev<CR>zz')
-vim.keymap.set('n', '<leader>k', '<cmd>lnext<CR>zz')
-vim.keymap.set('n', '<leader>j', '<cmd>lprev<CR>zz')
+vim.keymap.set('n', '<leader>j', '<cmd>cnext<CR>zz')
+vim.keymap.set('n', '<leader>k', '<cmd>cprev<CR>zz')
+-- vim.keymap.set('n', '<leader>k', '<cmd>lnext<CR>zz')
+-- vim.keymap.set('n', '<leader>j', '<cmd>lprev<CR>zz')
 
 vim.api.nvim_set_keymap(
   'n',
@@ -126,25 +126,25 @@ vim.keymap.set('n', '<C-l>', '<C-w>l')
 -- Use Alt/Meta + arrow keys for resizing
 vim.keymap.set(
   'n',
-  '<M-Up>',
-  '<cmd>resize +2<CR>',
+  '<M-k>',
+  '<cmd>resize +4<CR>',
   { desc = 'Increase window height' }
 )
 vim.keymap.set(
   'n',
-  '<M-Down>',
-  '<cmd>resize -2<CR>',
+  '<M-j>',
+  '<cmd>resize -4<CR>',
   { desc = 'Decrease window height' }
 )
 vim.keymap.set(
   'n',
-  '<M-Left>',
-  '<cmd>vertical resize -2<CR>',
+  '<M-h>',
+  '<cmd>vertical resize -4<CR>',
   { desc = 'Decrease window width' }
 )
 vim.keymap.set(
   'n',
-  '<M-Right>',
-  '<cmd>vertical resize +2<CR>',
+  '<M-l>',
+  '<cmd>vertical resize +4<CR>',
   { desc = 'Increase window width' }
 )
