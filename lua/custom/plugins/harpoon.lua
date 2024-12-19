@@ -11,6 +11,9 @@ return {
       { desc = 'Add file to harpoon' }
     )
     vim.keymap.set('n', '<C-e>', ui.toggle_quick_menu)
+    vim.keymap.set('n', '<C-s>', ui.nav_prev)
+    vim.keymap.set('n', '<C-f>', ui.nav_next)
+
     vim.keymap.set('n', '<leader>1', function()
       ui.nav_file(1)
     end)
