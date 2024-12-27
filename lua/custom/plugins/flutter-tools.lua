@@ -66,7 +66,7 @@ return {
               vim.fn.expand '~/fvm/',
             },
             renameFilesWithClasses = 'prompt', -- "always"
-            enableSnippets = true,
+            enableSnippets = false,
             updateImportsOnRename = true, -- Whether to update imports and other directives when files are renamed. Required for `FlutterRename` command.
           },
         },
