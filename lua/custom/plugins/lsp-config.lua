@@ -165,7 +165,8 @@ return { -- LSP Configuration & Plugins
       --
       pyright = {},
       html = { filetypes = { 'html', 'twig', 'hbs' } },
-      eslint_d = {},
+      eslint = {},
+      prettier = {},
       pylsp = {},
       lua_ls = {
         -- cmd = {...},

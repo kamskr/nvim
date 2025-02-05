@@ -9,6 +9,12 @@ require('telescope').setup {
       },
     },
   },
+  pickers = {
+    buffers = {
+      ignore_current_buffer = true,
+      sort_mru = true,
+    },
+  },
 }
 
 -- Enable telescope fzf native, if installed
@@ -83,12 +89,11 @@ vim.keymap.set(
   { desc = 'Search [G]it Files' }
 )
 
-vim.keymap.set(
-  'n',
-  '<C-p>',
-  require('telescope.builtin').find_files,
-  { desc = '[C]ustom Find [F]iles' }
-)
+vim.keymap.set('n', '<C-p>', function()
+  require('telescope.builtin').find_files {
+    sort_mru = true,
+  }
+end, { desc = '[C]ustom Find [F]iles (MRU)' })
 
 vim.keymap.set('n', '<leader>sf', function()
   require('telescope.builtin').find_files { hidden = true }

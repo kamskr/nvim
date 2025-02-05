@@ -35,7 +35,6 @@ require('lazy').setup({
 
   -- Useful plugin to show you pending keybinds.
   { 'folke/which-key.nvim', opts = {} },
-  { 'echasnovski/mini.nvim', version = false },
   {
     -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
@@ -147,6 +146,14 @@ require('lazy').setup({
         build = 'make',
         cond = function()
           return vim.fn.executable 'make' == 1
+        end,
+      },
+      {
+        'nvim-telescope/telescope-frecency.nvim',
+        -- install the latest stable version
+        version = '*',
+        config = function()
+          require('telescope').load_extension 'frecency'
         end,
       },
     },

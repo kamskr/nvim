@@ -1,7 +1,15 @@
 return {
-  {
-    'wa11breaker/flutter-bloc.nvim',
-  },
+  -- {
+  --   'wa11breaker/flutter-bloc.nvim',
+  --   dependencies = {
+  --     'nvimtools/none-ls.nvim', -- Required for code actions
+  --   },
+  --   opts = {
+  --     bloc_type = 'equatable', -- Choose from: 'default', 'equatable', 'freezed'
+  --     use_sealed_classes = false,
+  --     enable_code_actions = true,
+  --   },
+  -- },
   {
     'akinsho/flutter-tools.nvim',
     lazy = false,
@@ -61,9 +69,9 @@ return {
               vim.fn.expand '$HOME/AppData/Local/Pub/Cache',
               vim.fn.expand '$HOME/.pub-cache',
               vim.fn.expand '/opt/homebrew/',
-              vim.fn.expand '$HOME/tools/flutter/',
-              vim.fn.expand '$HOME/tools/flutter/',
-              vim.fn.expand '~/fvm/',
+              -- vim.fn.expand '$HOME/tools/flutter/',
+              -- vim.fn.expand '$HOME/tools/flutter/',
+              -- vim.fn.expand '~/fvm/',
             },
             renameFilesWithClasses = 'prompt', -- "always"
             enableSnippets = false,
