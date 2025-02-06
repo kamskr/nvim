@@ -126,9 +126,9 @@ require('lazy').setup({
     opts = {},
   },
 
-  -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim', opts = {} },
-
+  -- -- "gc" to comment visual regions/lines
+  -- { 'numToStr/Comment.nvim', opts = {} },
+  --
   -- Fuzzy Finder (files, lsp, etc)
   {
     'nvim-telescope/telescope.nvim',
@@ -146,14 +146,6 @@ require('lazy').setup({
         build = 'make',
         cond = function()
           return vim.fn.executable 'make' == 1
-        end,
-      },
-      {
-        'nvim-telescope/telescope-frecency.nvim',
-        -- install the latest stable version
-        version = '*',
-        config = function()
-          require('telescope').load_extension 'frecency'
         end,
       },
     },
