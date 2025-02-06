@@ -29,6 +29,7 @@ require 'keymaps'
 require 'custom/functions/flutter'
 require 'custom/functions/typescript'
 require 'custom/functions/auto-build-arb'
+require('custom.functions.remove-all-comments').setup()
 --
 -- [[ Configure Telescope ]]
 -- (fuzzy finder)
