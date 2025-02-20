@@ -114,37 +114,3 @@ vim.api.nvim_set_keymap(
   [[:vertical Git log -p -- %<CR>]],
   { noremap = true, silent = true, desc = 'Git open file history' }
 )
-
--- Windows management
--- Switching
-vim.keymap.set('n', '<C-h>', '<C-w>h')
-vim.keymap.set('n', '<C-j>', '<C-w>j')
-vim.keymap.set('n', '<C-k>', '<C-w>k')
-vim.keymap.set('n', '<C-l>', '<C-w>l')
-
--- Resizing
--- Use Alt/Meta + arrow keys for resizing
-vim.keymap.set(
-  'n',
-  '<M-k>',
-  '<cmd>resize +4<CR>',
-  { desc = 'Increase window height' }
-)
-vim.keymap.set(
-  'n',
-  '<M-j>',
-  '<cmd>resize -4<CR>',
-  { desc = 'Decrease window height' }
-)
-vim.keymap.set(
-  'n',
-  '<M-h>',
-  '<cmd>vertical resize -4<CR>',
-  { desc = 'Decrease window width' }
-)
-vim.keymap.set(
-  'n',
-  '<M-l>',
-  '<cmd>vertical resize +4<CR>',
-  { desc = 'Increase window width' }
-)
