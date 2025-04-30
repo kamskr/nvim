@@ -13,6 +13,8 @@ return {
   {
     'akinsho/flutter-tools.nvim',
     lazy = false,
+    -- Using this commit, as the plugin broke in the newest version
+    -- commit = '8edcdabfe982c77482ebde2ba3f46f2adc677e64',
     dependencies = {
       'nvim-lua/plenary.nvim',
       'stevearc/dressing.nvim', -- optional for vim.ui.select
@@ -20,6 +22,10 @@ return {
     config = function()
       require('flutter-tools').setup {
         decorations = {
+          ui = {
+            border = 'rounded',
+            notification_style = 'native',
+          },
           statusline = {
             -- set to true to be able use the 'flutter_tools_decorations.app_version' in your statusline
             -- this will show the current version of the flutter app from the pubspec.yaml file
