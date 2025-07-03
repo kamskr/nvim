@@ -36,4 +36,3 @@ If still doesn't work, follow instructions to unistall lazy.nvim:
 https://github.com/folke/lazy.nvim#-uninstalling
 
 Then reopen nvim and install `ast_grep` again.
-
