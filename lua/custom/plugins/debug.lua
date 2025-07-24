@@ -28,6 +28,109 @@ return {
     local dap = require 'dap'
     local dapui = require 'dapui'
 
+    -- Setup Catppuccin-compatible DAP highlights
+    local function setup_dap_highlights()
+      -- Get Catppuccin colors
+      local colors = {
+        rosewater = '#f5e0dc',
+        flamingo = '#f2cdcd',
+        pink = '#f5c2e7',
+        mauve = '#cba6f7',
+        red = '#f38ba8',
+        maroon = '#eba0ac',
+        peach = '#fab387',
+        yellow = '#f9e2af',
+        green = '#a6e3a1',
+        teal = '#94e2d5',
+        sky = '#89dceb',
+        sapphire = '#74c7ec',
+        blue = '#89b4fa',
+        lavender = '#b4befe',
+        text = '#cdd6f4',
+        subtext1 = '#bac2de',
+        subtext0 = '#a6adc8',
+        overlay2 = '#9399b2',
+        overlay1 = '#7f849c',
+        overlay0 = '#6c7086',
+        surface2 = '#585b70',
+        surface1 = '#45475a',
+        surface0 = '#313244',
+        base = '#1e1e2e',
+        mantle = '#181825',
+        crust = '#11111b',
+      }
+
+      -- DAP Breakpoint highlights
+      vim.api.nvim_set_hl(0, 'DapBreakpoint', {
+        ctermbg = 0,
+        fg = colors.red,
+        bg = colors.surface0,
+      })
+      vim.api.nvim_set_hl(0, 'DapLogPoint', {
+        ctermbg = 0,
+        fg = colors.blue,
+        bg = colors.surface0,
+      })
+      vim.api.nvim_set_hl(0, 'DapStopped', {
+        ctermbg = 0,
+        fg = colors.green,
+        bg = colors.surface0,
+      })
+
+      -- DAP UI highlights
+      vim.api.nvim_set_hl(0, 'DapUIScope', { fg = colors.sky })
+      vim.api.nvim_set_hl(0, 'DapUIType', { fg = colors.mauve })
+      vim.api.nvim_set_hl(0, 'DapUIValue', { fg = colors.text })
+      vim.api.nvim_set_hl(
+        0,
+        'DapUIModifiedValue',
+        { fg = colors.peach, bold = true }
+      )
+      vim.api.nvim_set_hl(0, 'DapUIDecoration', { fg = colors.blue })
+      vim.api.nvim_set_hl(0, 'DapUIThread', { fg = colors.green })
+      vim.api.nvim_set_hl(0, 'DapUIStoppedThread', { fg = colors.sky })
+      vim.api.nvim_set_hl(0, 'DapUIFrameName', { fg = colors.text })
+      vim.api.nvim_set_hl(0, 'DapUISource', { fg = colors.lavender })
+      vim.api.nvim_set_hl(0, 'DapUILineNumber', { fg = colors.overlay0 })
+      vim.api.nvim_set_hl(0, 'DapUIFloatBorder', { fg = colors.surface2 })
+      vim.api.nvim_set_hl(0, 'DapUIWatchesEmpty', { fg = colors.maroon })
+      vim.api.nvim_set_hl(0, 'DapUIWatchesValue', { fg = colors.green })
+      vim.api.nvim_set_hl(0, 'DapUIWatchesError', { fg = colors.red })
+      vim.api.nvim_set_hl(0, 'DapUIBreakpointsPath', { fg = colors.sky })
+      vim.api.nvim_set_hl(0, 'DapUIBreakpointsInfo', { fg = colors.green })
+      vim.api.nvim_set_hl(
+        0,
+        'DapUIBreakpointsCurrentLine',
+        { fg = colors.peach, bold = true }
+      )
+
+      -- REPL specific highlights
+      vim.api.nvim_set_hl(0, 'DapUIConsole', { fg = colors.text })
+      vim.api.nvim_set_hl(0, 'DapUIConsoleNC', { fg = colors.text })
+      vim.api.nvim_set_hl(0, 'DapUIWinSelect', { fg = colors.sky, bold = true })
+      vim.api.nvim_set_hl(0, 'DapUIEndofBuffer', { fg = colors.surface0 })
+
+      -- Virtual text highlights
+      vim.api.nvim_set_hl(0, 'DapUIVariable', { fg = colors.text })
+      vim.api.nvim_set_hl(0, 'DapUIPlayPause', { fg = colors.green })
+      vim.api.nvim_set_hl(0, 'DapUIRestart', { fg = colors.yellow })
+      vim.api.nvim_set_hl(0, 'DapUIStop', { fg = colors.red })
+      vim.api.nvim_set_hl(0, 'DapUIUnavailable', { fg = colors.overlay0 })
+      vim.api.nvim_set_hl(0, 'DapUIStepOver', { fg = colors.blue })
+      vim.api.nvim_set_hl(0, 'DapUIStepInto', { fg = colors.blue })
+      vim.api.nvim_set_hl(0, 'DapUIStepBack', { fg = colors.blue })
+      vim.api.nvim_set_hl(0, 'DapUIStepOut', { fg = colors.blue })
+    end
+
+    -- Apply highlights
+    setup_dap_highlights()
+
+    -- Reapply highlights when colorscheme changes
+    vim.api.nvim_create_autocmd('ColorScheme', {
+      pattern = '*',
+      callback = setup_dap_highlights,
+    })
+
     require('mason-nvim-dap').setup {
       -- Makes a best effort to setup the various debuggers with
       -- reasonable debug configurations
@@ -99,6 +202,13 @@ return {
       dap.set_breakpoint(vim.fn.input 'Breakpoint condition: ')
     end, { desc = 'Debug: Set Breakpoint' })
 
+    vim.keymap.set(
+      'n',
+      '<leader>dC',
+      dap.repl.clear,
+      { desc = 'Debug: Clear Console' }
+    )
+
     -- Dap UI setup
     -- For more information, see |:help nvim-dap-ui|
     dapui.setup {
@@ -119,6 +229,14 @@ return {
           disconnect = '⏏',
         },
       },
+      -- Enhanced rendering for better colors
+      render = {
+        max_type_length = nil, -- Can be integer or nil
+        max_value_lines = 100, -- Can be integer or nil
+        indent = 1,
+      },
+      -- Enable syntax highlighting in windows
+      expand_lines = true,
       layouts = {
         {
           elements = {
@@ -136,18 +254,47 @@ return {
             },
             {
               id = 'scopes',
-              size = 0.4,
-            },
-            {
-              id = 'repl',
-              size = 0.1,
+              size = 0.5,
             },
           },
           position = 'left',
           size = 40,
         },
+        {
+          elements = {
+            {
+              id = 'repl',
+              size = 1,
+            },
+          },
+          position = 'right',
+          size = 40,
+        },
       },
     }
+
+    -- Configure REPL console with proper colors
+    vim.api.nvim_create_autocmd('FileType', {
+      pattern = 'dapui_console',
+      callback = function()
+        -- Enable syntax highlighting for REPL console
+        vim.bo.syntax = 'on'
+        vim.bo.filetype = 'dapui_console'
+
+        -- Set up buffer-local highlights for better readability
+        vim.api.nvim_buf_set_option(0, 'wrap', true)
+        vim.api.nvim_buf_set_option(0, 'linebreak', true)
+
+        -- Enable colors in the REPL
+        vim.env.FORCE_COLOR = '1'
+        vim.env.CLICOLOR_FORCE = '1'
+      end,
+    })
+
+    -- Enhanced REPL toggle with better positioning
+    vim.keymap.set('n', '<leader>dr', function()
+      require('dapui').toggle 'repl'
+    end, { desc = 'Debug: Toggle REPL' })
 
     -- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
     vim.keymap.set(
@@ -157,9 +304,20 @@ return {
       { desc = 'Debug: toggle UI' }
     )
 
-    dap.listeners.after.event_initialized['dapui_config'] = dapui.open
-    dap.listeners.before.event_terminated['dapui_config'] = dapui.close
-    dap.listeners.before.event_exited['dapui_config'] = dapui.close
+    -- Enhanced DAP listeners with better error handling
+    dap.listeners.after.event_initialized['dapui_config'] = function()
+      dapui.open()
+    end
+    dap.listeners.before.event_terminated['dapui_config'] = function()
+      dapui.close()
+    end
+    dap.listeners.before.event_exited['dapui_config'] = function()
+      dapui.close()
+    end
+
+    -- Configure console output with colors
+    dap.defaults.fallback.terminal_win_cmd = '50vsplit new'
+    dap.defaults.fallback.focus_terminal = true
 
     local set_exception_breakpoints = require 'nvim-dap-exception-breakpoints'
 
@@ -174,5 +332,24 @@ return {
         require('dapui').eval(nil, { enter = true })
       end,
     })
+
+    -- Additional keymaps for better workflow
+    vim.keymap.set('n', '<leader>dh', function()
+      require('dap.ui.widgets').hover()
+    end, { desc = 'Debug: Hover Variables' })
+
+    vim.keymap.set('n', '<leader>dp', function()
+      require('dap.ui.widgets').preview()
+    end, { desc = 'Debug: Preview' })
+
+    vim.keymap.set('n', '<leader>df', function()
+      local widgets = require 'dap.ui.widgets'
+      widgets.centered_float(widgets.frames)
+    end, { desc = 'Debug: Show Frames' })
+
+    vim.keymap.set('n', '<leader>ds', function()
+      local widgets = require 'dap.ui.widgets'
+      widgets.centered_float(widgets.scopes)
+    end, { desc = 'Debug: Show Scopes' })
   end,
 }

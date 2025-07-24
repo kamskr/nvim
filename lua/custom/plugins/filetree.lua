@@ -7,6 +7,13 @@ return {
         default_file_explorer = true,
         delete_to_trash = true,
         skip_confirm_for_simple_edits = true,
+        watch_for_changes = true,
+        columns = {
+          'icon',
+          -- "permissions",
+          -- 'size',
+          -- "mtime",
+        },
         view_options = {
           natural_order = true,
           is_hidden_file = function(name, bufnr)
@@ -60,6 +67,7 @@ return {
         win_options = {
           wrap = true,
           winblend = 0,
+          signcolumn = 'yes:2',
         },
         keymaps = {
           ['<C-c>'] = false,
@@ -101,5 +109,19 @@ return {
         { desc = 'Open parent directory' }
       )
     end,
+  },
+  {
+    'refractalize/oil-git-status.nvim',
+
+    dependencies = {
+      'stevearc/oil.nvim',
+    },
+
+    config = true,
+  },
+  {
+    'JezerM/oil-lsp-diagnostics.nvim',
+    dependencies = { 'stevearc/oil.nvim' },
+    opts = {},
   },
 }

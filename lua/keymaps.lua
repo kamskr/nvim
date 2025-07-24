@@ -114,3 +114,33 @@ vim.api.nvim_set_keymap(
   [[:vertical Git log -p -- %<CR>]],
   { noremap = true, silent = true, desc = 'Git open file history' }
 )
+
+-- Copy relative path to clipboard
+vim.keymap.set('n', '<leader>cr', function()
+  local path = vim.fn.fnamemodify(vim.fn.expand '%', ':.')
+  vim.fn.setreg('+', path)
+  vim.notify('Copied to clipboard: ' .. path)
+end, { desc = 'Copy relative path to clipboard' })
+
+-- Copy all buffer paths with @ prefix
+vim.keymap.set('n', '<leader>cR', function()
+  local buffers = vim.api.nvim_list_bufs()
+  local paths = {}
+
+  for _, buf in ipairs(buffers) do
+    if
+      vim.api.nvim_buf_is_loaded(buf)
+      and vim.api.nvim_buf_get_option(buf, 'buflisted')
+    then
+      local bufname = vim.api.nvim_buf_get_name(buf)
+      if bufname ~= '' then
+        local path = vim.fn.fnamemodify(bufname, ':.')
+        table.insert(paths, '@' .. path)
+      end
+    end
+  end
+
+  local result = table.concat(paths, ' ')
+  vim.fn.setreg('+', result)
+  vim.notify('Copied to clipboard: ' .. result)
+end, { desc = 'Copy all buffer paths with @ prefix' })

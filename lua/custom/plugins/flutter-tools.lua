@@ -1,15 +1,15 @@
 return {
-  -- {
-  --   'wa11breaker/flutter-bloc.nvim',
-  --   dependencies = {
-  --     'nvimtools/none-ls.nvim', -- Required for code actions
-  --   },
-  --   opts = {
-  --     bloc_type = 'equatable', -- Choose from: 'default', 'equatable', 'freezed'
-  --     use_sealed_classes = false,
-  --     enable_code_actions = true,
-  --   },
-  -- },
+  {
+    'wa11breaker/flutter-bloc.nvim',
+    dependencies = {
+      'nvimtools/none-ls.nvim', -- Required for code actions
+    },
+    opts = {
+      bloc_type = 'equatable', -- Choose from: 'default', 'equatable', 'freezed'
+      use_sealed_classes = false,
+      enable_code_actions = true,
+    },
+  },
   {
     'akinsho/flutter-tools.nvim',
     lazy = false,
@@ -55,7 +55,7 @@ return {
           end,
         },
         dev_log = {
-          enabled = true,
+          enabled = false,
           notify_errors = true, -- if there is an error whilst running then notify the user
           -- open_cmd = "tabedit", -- command to use to open the log buffer
         },
