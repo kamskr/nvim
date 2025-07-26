@@ -118,7 +118,7 @@ vim.api.nvim_set_keymap(
 -- Copy relative path to clipboard
 vim.keymap.set('n', '<leader>cr', function()
   local path = vim.fn.fnamemodify(vim.fn.expand '%', ':.')
-  vim.fn.setreg('+', path)
+  vim.fn.setreg('+', '@' .. path)
   vim.notify('Copied to clipboard: ' .. path)
 end, { desc = 'Copy relative path to clipboard' })
 
