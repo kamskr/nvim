@@ -63,7 +63,7 @@ return {
       -- DAP Breakpoint highlights
       vim.api.nvim_set_hl(0, 'DapBreakpoint', {
         ctermbg = 0,
-        fg = colors.red,
+        fg = colors.yellow,
         bg = colors.surface0,
       })
       vim.api.nvim_set_hl(0, 'DapLogPoint', {
@@ -73,8 +73,9 @@ return {
       })
       vim.api.nvim_set_hl(0, 'DapStopped', {
         ctermbg = 0,
-        fg = colors.green,
+        fg = colors.red,
         bg = colors.surface0,
+        bold = true,
       })
 
       -- DAP UI highlights
@@ -129,6 +130,38 @@ return {
     vim.api.nvim_create_autocmd('ColorScheme', {
       pattern = '*',
       callback = setup_dap_highlights,
+    })
+
+    -- Configure DAP signs with big dots
+    vim.fn.sign_define('DapBreakpoint', {
+      text = '●',
+      texthl = 'DapBreakpoint',
+      linehl = '',
+      numhl = ''
+    })
+    vim.fn.sign_define('DapBreakpointCondition', {
+      text = '◐',
+      texthl = 'DapBreakpoint',
+      linehl = '',
+      numhl = ''
+    })
+    vim.fn.sign_define('DapBreakpointRejected', {
+      text = '○',
+      texthl = 'DapBreakpoint',
+      linehl = '',
+      numhl = ''
+    })
+    vim.fn.sign_define('DapLogPoint', {
+      text = '◉',
+      texthl = 'DapLogPoint',
+      linehl = '',
+      numhl = ''
+    })
+    vim.fn.sign_define('DapStopped', {
+      text = '●',
+      texthl = 'DapStopped',
+      linehl = 'DapStopped',
+      numhl = 'DapStopped'
     })
 
     require('mason-nvim-dap').setup {

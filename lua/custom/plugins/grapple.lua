@@ -1,0 +1,61 @@
+return {
+  'cbochs/grapple.nvim',
+  dependencies = {
+    { 'nvim-tree/nvim-web-devicons', lazy = true },
+  },
+  opts = {
+    scope = 'git', -- also try out "git_branch"
+  },
+  keys = {
+    { '<leader>a', '<cmd>Grapple toggle<cr>', desc = 'Tag a file' },
+    { '<c-e>', '<cmd>:Telescope grapple tags<cr>', desc = 'Toggle tags menu' },
+    { '<c-g>', '<cmd>Grapple toggle_tags<cr>', desc = 'Toggle tags menu' },
+
+    {
+      '<leader>1',
+      '<cmd>Grapple select index=1<cr>',
+      desc = 'Select first tag',
+    },
+    {
+      '<leader>2',
+      '<cmd>Grapple select index=2<cr>',
+      desc = 'Select second tag',
+    },
+    {
+      '<leader>3',
+      '<cmd>Grapple select index=3<cr>',
+      desc = 'Select third tag',
+    },
+    {
+      '<leader>4',
+      '<cmd>Grapple select index=4<cr>',
+      desc = 'Select fourth tag',
+    },
+    {
+      '<leader>5',
+      '<cmd>Grapple select index=5<cr>',
+      desc = 'Select fourth tag',
+    },
+    {
+      '<leader>6',
+      '<cmd>Grapple select index=6<cr>',
+      desc = 'Select fourth tag',
+    },
+    {
+      '<leader>7',
+      '<cmd>Grapple select index=7<cr>',
+      desc = 'Select fourth tag',
+    },
+
+    {
+      '<leader>i',
+      '<cmd>Grapple cycle_tags next<cr>',
+      desc = 'Go to next tag',
+    },
+    {
+      '<leader>o',
+      '<cmd>Grapple cycle_tags prev<cr>',
+      desc = 'Go to previous tag',
+    },
+  },
+}

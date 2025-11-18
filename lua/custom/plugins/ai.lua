@@ -1,74 +1,89 @@
 return {
-  'azorng/goose.nvim',
-  dependencies = {
-    'nvim-lua/plenary.nvim',
-    {
-      'MeanderingProgrammer/render-markdown.nvim',
-      opts = {
-        anti_conceal = { enabled = false },
+  {
+    'folke/sidekick.nvim',
+    opts = {
+      -- add any options here
+      cli = {
+        mux = {
+          backend = 'tmux',
+          enabled = true,
+        },
+      },
+    },
+    keys = {
+      {
+        '<tab>',
+        function()
+          -- if there is a next edit, jump to it, otherwise apply it if any
+          if not require('sidekick').nes_jump_or_apply() then
+            return '<Tab>' -- fallback to normal tab
+          end
+        end,
+        expr = true,
+        desc = 'Goto/Apply Next Edit Suggestion',
+      },
+      {
+        '<leader>aa',
+        function()
+          require('sidekick.cli').toggle 'opencode'
+        end,
+        desc = 'Sidekick Toggle CLI',
+      },
+      {
+        '<leader>as',
+        function()
+          require('sidekick.cli').select()
+        end,
+        -- Or to select only installed tools:
+        -- require("sidekick.cli").select({ filter = { installed = true } })
+        desc = 'Select CLI',
+      },
+      {
+        '<leader>ad',
+        function()
+          require('sidekick.cli').close()
+        end,
+        desc = 'Detach a CLI Session',
+      },
+      {
+        '<leader>as',
+        function()
+          require('sidekick.cli').send { msg = '{this}' }
+        end,
+        mode = { 'x', 'n' },
+        desc = 'Send This',
+      },
+      {
+        '<leader>af',
+        function()
+          require('sidekick.cli').send { msg = '{file}' }
+        end,
+        desc = 'Send File',
+      },
+      {
+        '<leader>av',
+        function()
+          require('sidekick.cli').send { msg = '{selection}' }
+        end,
+        mode = { 'x' },
+        desc = 'Send Visual Selection',
+      },
+      {
+        '<leader>ap',
+        function()
+          require('sidekick.cli').prompt()
+        end,
+        mode = { 'n', 'x' },
+        desc = 'Sidekick Select Prompt',
+      },
+      -- Example of a keybinding to open Claude directly
+      {
+        '<leader>ac',
+        function()
+          require('sidekick.cli').toggle { name = 'claude', focus = true }
+        end,
+        desc = 'Sidekick Toggle Claude',
       },
     },
   },
-  config = function()
-    -- Default configuration with all available options
-    require('goose').setup {
-      prefered_picker = 'telescope', -- 'telescope', 'fzf', 'mini.pick', 'snacks', if nil, it will use the best available picker
-      default_global_keymaps = true, -- If false, disables all default global keymaps
-      keymap = {
-        global = {
-          toggle = '<leader>aa', -- Open goose. Close if opened
-          open_input = '<leader>aI', -- Opens and focuses on input window on insert mode
-          open_input_new_session = '<leader>ai', -- Opens and focuses on input window on insert mode. Creates a new session
-          open_output = '<leader>ao', -- Opens and focuses on output window
-          toggle_focus = '<leader>at', -- Toggle focus between goose and last window
-          close = '<leader>aq', -- Close UI windows
-          toggle_fullscreen = '<leader>af', -- Toggle between normal and fullscreen mode
-          select_session = '<leader>as', -- Select and load a goose session
-          goose_mode_chat = '<leader>amc', -- Set goose mode to `chat`. (Tool calling disabled. No editor context besides selections)
-          goose_mode_auto = '<leader>ama', -- Set goose mode to `auto`. (Default mode with full agent capabilities)
-          configure_provider = '<leader>ap', -- Quick provider and model switch from predefined list
-          diff_open = '<leader>ad', -- Opens a diff tab of a modified file since the last goose prompt
-          diff_next = '<leader>a]', -- Navigate to next file diff
-          diff_prev = '<leader>a[', -- Navigate to previous file diff
-          diff_close = '<leader>ac', -- Close diff view tab and return to normal editing
-          diff_revert_all = '<leader>ara', -- Revert all file changes since the last goose prompt
-          diff_revert_this = '<leader>art', -- Revert current file changes since the last goose prompt
-        },
-        window = {
-          submit = '<cr>', -- Submit prompt
-          close = '<esc>', -- Close UI windows
-          stop = '<C-c>', -- Stop goose while it is running
-          next_message = ']]', -- Navigate to next message in the conversation
-          prev_message = '[[', -- Navigate to previous message in the conversation
-          mention_file = '@', -- Pick a file and add to context. See File Mentions section
-          toggle_pane = '<tab>', -- Toggle between input and output panes
-          prev_prompt_history = '<up>', -- Navigate to previous prompt in history
-          next_prompt_history = '<down>', -- Navigate to next prompt in history
-        },
-      },
-      ui = {
-        window_width = 0.35, -- Width as percentage of editor width
-        input_height = 0.15, -- Input height as percentage of window height
-        fullscreen = false, -- Start in fullscreen mode (default: false)
-        layout = 'center', -- Options: "center" or "right"
-        floating_height = 0.8, -- Height as percentage of editor height for "center" layout
-        display_model = true, -- Display model name on top winbar
-        display_goose_mode = true, -- Display mode on top winbar: auto|chat
-      },
-      providers = {
-        --[[
-    Define available providers and their models for quick model switching
-    anthropic|azure|bedrock|databricks|google|groq|ollama|openai|openrouter
-    Example:
-    openrouter = {
-      "anthropic/claude-3.5-sonnet",
-      "openai/gpt-4.1",
-    },
-    ollama = {
-      "cogito:14b"
-    }
-    --]]
-      },
-    }
-  end,
 }

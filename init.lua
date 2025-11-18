@@ -12,6 +12,7 @@ vim.opt.spelllang = 'en_us'
 vim.opt.spell = false
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
+vim.lsp.enable {}
 
 vim.g.copilot_assume_mapped = true
 

@@ -69,6 +69,7 @@ vim.keymap.set({ 'n', 'v' }, '<leader>d', [["_d]])
 
 vim.keymap.set('n', 'Q', '<nop>')
 vim.keymap.set('n', '<leader>f', vim.lsp.buf.format)
+vim.keymap.set('n', '<leader>w', '<cmd>noautocmd w<CR>', { desc = 'Save without formatting' })
 
 vim.keymap.set('n', '<leader>j', '<cmd>cnext<CR>zz')
 vim.keymap.set('n', '<leader>k', '<cmd>cprev<CR>zz')
@@ -115,11 +116,30 @@ vim.api.nvim_set_keymap(
   { noremap = true, silent = true, desc = 'Git open file history' }
 )
 
--- Copy relative path to clipboard
-vim.keymap.set('n', '<leader>cr', function()
+-- Copy relative path to clipboard (with line selection in visual mode)
+vim.keymap.set({ 'n', 'v' }, '<leader>cr', function()
   local path = vim.fn.fnamemodify(vim.fn.expand '%', ':.')
-  vim.fn.setreg('+', '@' .. path)
-  vim.notify('Copied to clipboard: ' .. path)
+  local mode = vim.fn.mode()
+  
+  if mode == 'v' or mode == 'V' then
+    -- Visual mode: include line range and selected text
+    local start_line = vim.fn.line "'<"
+    local end_line = vim.fn.line "'>"
+    local lines = vim.api.nvim_buf_get_lines(0, start_line - 1, end_line, false)
+    
+    local result = '@' .. path .. ':' .. start_line
+    if start_line ~= end_line then
+      result = result .. '-' .. end_line
+    end
+    result = result .. '\n' .. table.concat(lines, '\n')
+    
+    vim.fn.setreg('+', result)
+    vim.notify('Copied to clipboard: ' .. path .. ':' .. start_line .. '-' .. end_line)
+  else
+    -- Normal mode: just copy the path
+    vim.fn.setreg('+', '@' .. path)
+    vim.notify('Copied to clipboard: ' .. path)
+  end
 end, { desc = 'Copy relative path to clipboard' })
 
 -- Copy all buffer paths with @ prefix
