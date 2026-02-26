@@ -20,6 +20,166 @@ vim.api.nvim_set_keymap(
   { noremap = true, silent = true }
 )
 
+vim.api.nvim_create_user_command('FlutterDetachedRun', function(opts)
+  local env = opts.fargs[1] or 'none'
+  local cwd = vim.fn.getcwd()
+  local project = vim.fn.fnamemodify(cwd, ':t')
+
+  -- Get current tmux session name
+  local current_session =
+    vim.fn.system({ 'tmux', 'display-message', '-p', '#S' }):gsub('%s+', '')
+
+  -- Handle case when not inside tmux
+  if current_session == '' then
+    print '❌ Not inside a tmux session.'
+    return
+  end
+
+  -- Determine window name and command
+  local prefix = project .. '_' .. env
+  local flutter_cmd = nil
+
+  local function build_flutter_command(env)
+    if env == 'development' then
+      return {
+        'fvm',
+        'flutter',
+        'run',
+        '-t',
+        'lib/main_development.dart',
+        '--flavor',
+        'development',
+        '--dart-define-from-file',
+        'config-development.json',
+      }
+    elseif env == 'staging' then
+      return {
+        'fvm',
+        'flutter',
+        'run',
+        '-t',
+        'lib/main_staging.dart',
+        '--flavor',
+        'staging',
+        '--dart-define-from-file',
+        'config-staging.json',
+      }
+    elseif env == 'production' then
+      return {
+        'fvm',
+        'flutter',
+        'run',
+        '-t',
+        'lib/main_production.dart',
+        '--flavor',
+        'production',
+        '--dart-define-from-file',
+        'config-production.json',
+      }
+    else
+      return { 'fvm', 'flutter', 'run' }
+    end
+  end
+
+  flutter_cmd = build_flutter_command(env)
+
+  -- Find a free window name (auto-increment)
+  local i = 1
+  local window_name = prefix .. '_' .. i
+  local existing = vim.fn.systemlist {
+    'tmux',
+    'list-windows',
+    '-t',
+    current_session,
+    '-F',
+    '#W',
+  }
+  local name_set = {}
+  for _, w in ipairs(existing) do
+    name_set[w] = true
+  end
+  while name_set[window_name] do
+    i = i + 1
+    window_name = prefix .. '_' .. i
+  end
+
+  -- find the last numeric window index in this tmux session
+  local windows = vim.fn.systemlist {
+    'tmux',
+    'list-windows',
+    '-t',
+    current_session,
+    '-F',
+    '#{window_index}',
+  }
+  local max_index = 0
+  for _, idx in ipairs(windows) do
+    local n = tonumber(idx)
+    if n and n > max_index then
+      max_index = n
+    end
+  end
+  local next_index = max_index + 1
+
+  -- create the new flutter window *after* all existing ones
+  vim.fn.jobstart({
+    'tmux',
+    'new-window',
+    '-t',
+    string.format('%s:%d', current_session, next_index),
+    '-n',
+    window_name,
+    'bash',
+    '-lc',
+    table.concat(flutter_cmd, ' '),
+  }, { detach = true })
+
+  print(
+    '🚀 Started Flutter (' .. env .. ') in window [' .. window_name .. ']'
+  )
+end, {
+  nargs = '?',
+  desc = 'Run Flutter in a new tmux window of the current session',
+  complete = function()
+    return { 'development', 'staging', 'production', 'none' }
+  end,
+})
+
+vim.api.nvim_create_autocmd('BufWritePost', {
+  pattern = '*.dart',
+  callback = function()
+    -- current working directory name, as project hint
+    local project = vim.fn.fnamemodify(vim.fn.getcwd(), ':t')
+
+    -- collect all panes
+    local panes = vim.fn.systemlist {
+      'tmux',
+      'list-panes',
+      '-a',
+      '-F',
+      '#{session_name}:#{window_index}.#{pane_index}:#{pane_tty}:#{pane_current_command}',
+    }
+
+    local count = 0
+    for _, line in ipairs(panes) do
+      -- line example: 0:1.1:/dev/ttys018:fvm
+      local session, win, pane, tty, cmd =
+        string.match(line, '([^:]+):([^%.]+)%.([^:]+):([^:]+):(.+)')
+      if cmd and (cmd:match 'flutter' or cmd:match 'fvm') then
+        local target = string.format('%s:%s.%s', session, win, pane)
+        vim.fn.jobstart { 'tmux', 'send-keys', '-t', target, 'r', 'Enter' }
+        count = count + 1
+      end
+    end
+
+    if count > 0 then
+      print('🔁 Hot reloaded ' .. count .. ' Flutter pane(s)')
+    else
+      print 'ℹ️ No Flutter panes detected.'
+    end
+  end,
+})
+
 function createNestedDirectory(directoryPath)
   -- Recursive function to create nested directories
   local parentDirectory = im.fn.fnamemodify(directoryPath, ':h')
