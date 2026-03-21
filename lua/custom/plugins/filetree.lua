@@ -71,7 +71,10 @@ return {
         },
         keymaps = {
           ['<C-c>'] = false,
-          ['<C-v>'] = 'actions.preview',
+          ['<C-v>'] = {
+            'actions.preview',
+            opts = { vertical = true, split = 'belowright' },
+          },
           ['q'] = 'actions.close',
           ['<C-t>'] = 'actions.toggle_hidden',
           ['?'] = 'actions.show_help',

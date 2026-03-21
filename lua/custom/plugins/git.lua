@@ -1,6 +1,32 @@
 return {
 
   { 'tpope/vim-fugitive' },
+  {
+    'sindrets/diffview.nvim',
+    lazy = false,
+    keys = {
+      {
+        '<leader>gH',
+        '<cmd>DiffviewFileHistory<CR>',
+        desc = 'Diffview file history',
+      },
+      {
+        '<leader>gd',
+        '<cmd>:DiffviewOpen<CR>',
+        desc = 'Diffview file history with the main branch',
+      },
+      {
+        '<leader>q',
+        function()
+          local view = require('diffview.lib').get_current_view()
+          if view then
+            vim.cmd 'DiffviewClose'
+          end
+        end,
+        desc = 'Close diffview',
+      },
+    },
+  },
   { 'tpope/vim-rhubarb' },
   { 'akinsho/git-conflict.nvim', version = '*', config = true },
   {

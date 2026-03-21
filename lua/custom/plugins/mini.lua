@@ -7,6 +7,8 @@ return {
     require('mini.surround').setup()
     require('mini.pairs').setup()
     require('mini.bracketed').setup()
+    require('mini.notify').setup()
+    require('mini.cmdline').setup()
     require('mini.statusline').setup()
   end,
 }
