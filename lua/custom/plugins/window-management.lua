@@ -1,58 +1,46 @@
-local function herdr_nvim_server()
-  if not vim.env.HERDR_PANE_ID then
-    return nil
-  end
-
-  local pane_id = vim.env.HERDR_PANE_ID:gsub('[^%w_.-]', '_')
-  return ('/tmp/herdr-nvim-%s-%s.sock'):format(vim.env.USER or 'user', pane_id)
-end
-
-local server = herdr_nvim_server()
-if server and vim.v.servername ~= server then
-  pcall(vim.fn.serverstart, server)
-end
-
-function _G.HerdrNavigate(nvim_direction)
-  local win = vim.api.nvim_get_current_win()
-  vim.cmd.wincmd(nvim_direction)
-  if vim.api.nvim_get_current_win() ~= win then
-    return 'moved'
-  end
-
-  return 'edge'
-end
-
-local function navigate(nvim_direction, herdr_direction, tmux_command)
-  if _G.HerdrNavigate(nvim_direction) == 'moved' then
-    return
-  end
-
-  if vim.env.HERDR_PANE_ID then
-    vim.fn.jobstart({ 'herdr', 'pane', 'focus', '--pane', vim.env.HERDR_PANE_ID, '--direction', herdr_direction }, { detach = true })
-  else
-    vim.cmd[tmux_command]()
-  end
-end
-
 return {
-  'christoomey/vim-tmux-navigator',
-  init = function()
-    vim.g.tmux_navigator_no_mappings = 1
-  end,
-  cmd = {
-    'TmuxNavigateLeft',
-    'TmuxNavigateDown',
-    'TmuxNavigateUp',
-    'TmuxNavigateRight',
-    'TmuxNavigatePrevious',
-    'TmuxNavigatorProcessList',
+  {
+    'lmilojevicc/herdr-splits.nvim',
+    cond = vim.env.HERDR_ENV == '1',
+    event = 'VeryLazy',
+    build = function()
+      require('herdr-splits').sync_herdr()
+    end,
+    config = function()
+      require('herdr-splits').setup {
+        auto_sync_herdr = true,
+      }
+    end,
+    keys = {
+      { '<c-h>', function() require('herdr-splits').move_cursor_left() end, desc = 'Navigate left' },
+      { '<c-j>', function() require('herdr-splits').move_cursor_down() end, desc = 'Navigate down' },
+      { '<c-k>', function() require('herdr-splits').move_cursor_up() end, desc = 'Navigate up' },
+      { '<c-l>', function() require('herdr-splits').move_cursor_right() end, desc = 'Navigate right' },
+      { '<m-h>', function() require('herdr-splits').resize_left() end, desc = 'Resize left' },
+      { '<m-j>', function() require('herdr-splits').resize_down() end, desc = 'Resize down' },
+      { '<m-k>', function() require('herdr-splits').resize_up() end, desc = 'Resize up' },
+      { '<m-l>', function() require('herdr-splits').resize_right() end, desc = 'Resize right' },
+    },
   },
-  keys = {
-    { '<c-h>', function() navigate('h', 'left', 'TmuxNavigateLeft') end },
-    { '<c-j>', function() navigate('j', 'down', 'TmuxNavigateDown') end },
-    { '<c-k>', function() navigate('k', 'up', 'TmuxNavigateUp') end },
-    { '<c-l>', function() navigate('l', 'right', 'TmuxNavigateRight') end },
-    { '<c-\\>', '<cmd><C-U>TmuxNavigatePrevious<cr>' },
+
+  {
+    'christoomey/vim-tmux-navigator',
+    cond = vim.env.HERDR_ENV ~= '1',
+    cmd = {
+      'TmuxNavigateLeft',
+      'TmuxNavigateDown',
+      'TmuxNavigateUp',
+      'TmuxNavigateRight',
+      'TmuxNavigatePrevious',
+      'TmuxNavigatorProcessList',
+    },
+    keys = {
+      { '<c-h>', '<cmd><C-U>TmuxNavigateLeft<cr>' },
+      { '<c-j>', '<cmd><C-U>TmuxNavigateDown<cr>' },
+      { '<c-k>', '<cmd><C-U>TmuxNavigateUp<cr>' },
+      { '<c-l>', '<cmd><C-U>TmuxNavigateRight<cr>' },
+      { '<c-\\>', '<cmd><C-U>TmuxNavigatePrevious<cr>' },
+    },
+    config = function() end,
   },
-  config = function() end,
 }
