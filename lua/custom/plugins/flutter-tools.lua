@@ -60,14 +60,11 @@ return {
           -- open_cmd = "tabedit", -- command to use to open the log buffer
         },
         lsp = {
-          color = { -- show the derived colours for dart variables
-            enabled = true, -- whether or not to highlight color variables at all, only supported on flutter >= 2.10
-            background = false, -- highlight the background
-            background_color = { r = 19, g = 17, b = 24 }, -- required, when background is transparent (i.e. background_color = { r = 19, g = 17, b = 24},)
-            foreground = false, -- highlight the foreground
-            virtual_text = true, -- show the highlight using virtual text
-            virtual_text_str = '■', -- the virtual text character to highlight
-          },
+          -- Colour swatches come from Neovim 0.12's built-in document colour
+          -- support (enabled in on_attach); setting lsp.color here is deprecated.
+          on_attach = function(_, bufnr)
+            vim.lsp.document_color.enable(true, { bufnr = bufnr }, { style = '■' })
+          end,
           settings = {
             showTodos = false,
             completeFunctionCalls = true,
